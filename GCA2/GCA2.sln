@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCA2", "GCA2.csproj", "{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Windows Phone = Debug|Windows Phone
+		Release|Windows Phone = Release|Windows Phone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}.Debug|Windows Phone.Build.0 = Debug|Windows Phone
+		{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}.Debug|Windows Phone.Deploy.0 = Debug|Windows Phone
+		{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
+		{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}.Release|Windows Phone.Build.0 = Release|Windows Phone
+		{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}.Release|Windows Phone.Deploy.0 = Release|Windows Phone
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
