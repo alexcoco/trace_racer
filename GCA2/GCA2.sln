@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCA2", "GCA2.csproj", "{2E6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStateManagement (Windows Phone)", "..\..\..\..\..\Desktop\GameStateManagementSample\GameStateManagement\GameStateManagement (Windows Phone).csproj", "{D613ECAD-5F4D-44E6-8FB7-7ECAFF3D02D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCA2Content", "..\GCA2Content\GCA2Content.contentproj", "{8AAFC098-E9CD-42EA-8240-E4C99270EC63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Windows Phone = Debug|Windows Phone
@@ -21,6 +23,8 @@ Global
 		{D613ECAD-5F4D-44E6-8FB7-7ECAFF3D02D5}.Debug|Windows Phone.Build.0 = Debug|Windows Phone
 		{D613ECAD-5F4D-44E6-8FB7-7ECAFF3D02D5}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
 		{D613ECAD-5F4D-44E6-8FB7-7ECAFF3D02D5}.Release|Windows Phone.Build.0 = Release|Windows Phone
+		{8AAFC098-E9CD-42EA-8240-E4C99270EC63}.Debug|Windows Phone.ActiveCfg = Debug|Windows Phone
+		{8AAFC098-E9CD-42EA-8240-E4C99270EC63}.Release|Windows Phone.ActiveCfg = Release|Windows Phone
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
