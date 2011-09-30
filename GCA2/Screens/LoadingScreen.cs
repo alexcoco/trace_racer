@@ -11,7 +11,6 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameStateManagement;
 #endregion
 
 namespace GCA2

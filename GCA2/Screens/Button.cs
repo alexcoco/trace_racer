@@ -8,7 +8,6 @@
 #endregion
 
 using System;
-using GameStateManagement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
