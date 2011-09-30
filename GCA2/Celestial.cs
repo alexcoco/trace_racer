@@ -15,12 +15,14 @@ namespace GCA2
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Celestial : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+        ScreenManager screenManager;
+        ScreenFactory screenFactory;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        public Celestial()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -30,6 +32,14 @@ namespace GCA2
 
             // Extend battery life under lock.
             InactiveSleepTime = TimeSpan.FromSeconds(1);
+
+            #if WINDOWS_PHONE
+            graphics.IsFullScreen = true;
+
+            // Choose whether you want a landscape or portait game by using one of the two helper functions.
+            InitializeLandscapeGraphics();
+            // InitializePortraitGraphics();
+            #endif
         }
 
         /// <summary>
