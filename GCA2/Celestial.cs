@@ -33,7 +33,8 @@ namespace GCA2
             Content.RootDirectory = "Content";
 
             graphics = new GraphicsDeviceManager(this);
-            TargetElapsedTime = TimeSpan.FromTicks(333333);
+            //TargetElapsedTime = TimeSpan.FromTicks(333333);
+            TargetElapsedTime = TimeSpan.FromTicks(1);
 
 #if WINDOWS_PHONE
             graphics.IsFullScreen = true;

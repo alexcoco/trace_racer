@@ -42,6 +42,8 @@ namespace GCA2
         Texture2D tileGrass;
 
         Boolean isPressed = false;
+        int pressedLastX = 0;
+        int pressedLastY = 0;
 
         List<WorldLine> lineQueue = new List<WorldLine>(800);
         Random random = new Random();
@@ -79,8 +81,6 @@ namespace GCA2
             {
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
-
-                TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap | GestureType.Hold;
 
                 gameFont = content.Load<SpriteFont>("gamefont");
                 touchTexture = content.Load<Texture2D>("sprites/touch");
@@ -166,30 +166,50 @@ namespace GCA2
 
                     TouchCollection touchCollection = TouchPanel.GetState();
 
-                    foreach (TouchLocation tl in touchCollection)
+                    lineQueue.RemoveAt(0);
+                    pressedLastX--;
+
+                    if (touchCollection.Count == 0)
                     {
-                        touchPosition.X = tl.Position.X;
-                        touchPosition.Y = tl.Position.Y;
-
-                        lineQueue.RemoveAt(0);
-
-                        if ((TouchPanel.ReadGesture().GestureType == GestureType.Hold))
-                        {
-                            isPressed = true;
-                            lineQueue.Add(new WorldLine(480 - (int)touchPosition.Y));
-                        }
-                        else
-                        {
-                            isPressed = false;
-                            lineQueue.Add(new WorldLine(-1));
-                        }
-                        break;
+                        isPressed = false;
+                        lineQueue.Add(new WorldLine(-1));
                     }
+                    else
+                    {
+                        foreach (TouchLocation tl in touchCollection)
+                        {
+                            touchPosition.X = tl.Position.X;
+                            touchPosition.Y = tl.Position.Y;
 
+                            if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                            {
+                               // isPressed = true;
+                                if (touchPosition.X > pressedLastX)
+                                {
+                                    lineQueue.Insert((int)touchPosition.X, new WorldLine(480 - (int)touchPosition.Y));
+                                    if (isPressed) // is touch being held?
+                                    {
+                                        if (pressedLastY < touchPosition.Y) {
+                                            //for (int i = pressedLastX - 1; i < (int)touchPosition.X; i++)
+                                            //{
+                                            lineQueue.RemoveAt(pressedLastX);
+                                            lineQueue.Insert(pressedLastX, new WorldLine(480 - pressedLastY));
+                                            //}
+                                        }
+                                    }
+                                    pressedLastX = (int)touchPosition.X;
+                                    pressedLastY++;
+                                }
+                                else
+                                {
+                                    lineQueue.Add(new WorldLine(-1));
+                                }
+                                isPressed = true;
+                            }
 
-
-
-
+                            break;
+                        }
+                    }
                 #endregion
             }
         }
@@ -285,7 +305,7 @@ namespace GCA2
                 }
             
                 spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y, new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(60, 0), Color.White);
+                spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 15), Color.White);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.
