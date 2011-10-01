@@ -51,6 +51,7 @@ namespace GCA2
         float pauseAlpha;
 
         InputAction pauseAction;
+        int newLineY;
 
         #endregion
 
@@ -186,6 +187,38 @@ namespace GCA2
                                // isPressed = true;
                                 if (touchPosition.X > pressedLastX)
                                 {
+                                    for (;pressedLastX < touchPosition.X; pressedLastX++)
+                                    {
+                                        if (pressedLastY == 0)
+                                        {
+                                            pressedLastY = (int) touchPosition.Y;
+                                        }
+
+                                        newLineY = pressedLastY;
+
+                                        if (isPressed)
+                                        {
+                                            if (pressedLastY < touchPosition.Y)
+                                            {
+                                                // Decreasing
+                                                newLineY = (int) touchPosition.Y;
+                                            }
+                                            else if (pressedLastY > touchPosition.Y)
+                                            {
+                                                // Increasing
+                                                newLineY-= 2;
+                                            }
+                                            else
+                                            {
+                                                // No change
+                                                // Do nothing
+                                            }
+
+                                            lineQueue.Insert(pressedLastX, new WorldLine(TouchPanel.DisplayHeight - newLineY));
+                                            pressedLastY = newLineY;
+                                        }
+                                    }
+                                    /*
                                     lineQueue.Insert((int)touchPosition.X, new WorldLine(480 - (int)touchPosition.Y));
                                     if (isPressed) // is touch being held?
                                     {
@@ -199,6 +232,7 @@ namespace GCA2
                                     }
                                     pressedLastX = (int)touchPosition.X;
                                     pressedLastY++;
+                                    */
                                 }
                                 else
                                 {
@@ -299,12 +333,12 @@ namespace GCA2
             spriteBatch.Begin();
                 spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
-                for (int i = 0; i < 800; i++)
+                for (int i = 0; i < lineQueue.Count; i++)
                 {
                     spriteBatch.Draw(tileGrass, new Vector2(i, 480 - lineQueue[i].Height), Color.White);
                 }
             
-                spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y, new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
                 spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 15), Color.White);
             spriteBatch.End();
 
