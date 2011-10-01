@@ -14,7 +14,12 @@ namespace GCA2
 
         public WorldLine()
         {
-            Height = 10;
+            Height = 0;
+        }
+
+        public WorldLine(int h)
+        {
+            Height = h;
         }
 
     }
