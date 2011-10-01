@@ -21,11 +21,12 @@ namespace GCA2
         public bool IsAlive { get; set; }
         public Texture2D Texture { get; set; }
         //public Rectangle Rectangle { get; set; } // we could use Texture.Bounds instead
-        public Vector2 Position { get; set; }
+        public Vector2 Position;
         public Vector2 Speed { get; set; } // Will be used for positioning
         public WorldObject World { get; set; }
         public WorldLine CurrentLine { get; set; }
         public Score Score { get; set; }
+        Boolean isActive = false;
 
         private SpriteBatch mySpriteBatch;
 
@@ -44,8 +45,20 @@ namespace GCA2
             Texture = Game.Content.Load<Texture2D>("bike");
 
             Speed = new Vector2(Constants.NORMAL_SPEED, 0);
-            Position = new Vector2(Speed.X, -Texture.Height);
+            //Position = new Vector2(Speed.X, -Texture.Height);
+            Position = new Vector2(10, -Texture.Height);
             CurrentLine = world.getLine((int)Position.X);
+        }
+
+        public void setActive()
+        {
+            isActive = true;
+        }
+
+        public void setPosition(Vector2 v)
+        {
+            Position.X = v.X;
+            Position.Y = v.Y;
         }
 
         /// <summary>
@@ -65,34 +78,37 @@ namespace GCA2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // Check if colliding with the world
-            if (World.IsColliding(this))
-            {
-                // End Game
-            }
-            else
-            {
-                // Check if touching the world
-                if (World.IsTouching(this))
+            if (isActive)
+            {   
+                // Check if colliding with the world
+                if (World.IsColliding(this))
                 {
-                    // On the ground
-                    // TODO: update position depending on speed
-                    updateGroundPosition(gameTime.ElapsedGameTime.Milliseconds);
+                    // End Game
                 }
                 else
                 {
-                    // In the air
-                    updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
+                    // Check if touching the world
+                    if (World.IsTouching(this))
+                    {
+                        // On the ground
+                        // TODO: update position depending on speed
+                        updateGroundPosition(gameTime.ElapsedGameTime.Milliseconds);
+                    }
+                    else
+                    {
+                        // In the air
+                        updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
+                    }
                 }
-            }
 
-            base.Update(gameTime);
+                base.Update(gameTime);
+            }
         }
 
         private void updateAirPosition(int elapsedGameTime)
         {
-            // TODO
-            Position = new Vector2(Position.X, Position.Y);
+            Position.Y--;
+            //Position = new Vector2(Position.X, Position.Y--);
         }
 
         private void updateGroundPosition(int elapsedGameTime)
@@ -110,7 +126,9 @@ namespace GCA2
         {
             if (this.IsAlive)
             {
+                mySpriteBatch.Begin();
                 mySpriteBatch.Draw(Texture, Position, Color.White);
+                mySpriteBatch.End();
             }
 
             base.Draw(gameTime);

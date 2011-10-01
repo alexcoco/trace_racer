@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GCA2
 {
@@ -10,19 +12,34 @@ namespace GCA2
     /// </summary>
     public class WorldObject
     {
+        Game game;
+        SpriteBatch spriteBatch;
+
         List<WorldLine> lineQueue = new List<WorldLine>(800);
+
+        public PlayerObject player;
+
+        public WorldObject(Game g, SpriteBatch sb)
+        {
+            game = g;
+            spriteBatch = sb;
+            player = new PlayerObject(game, sb, this);
+            game.Components.Add(player);
+        }
+
+        public PlayerObject getPlayer()
+        {
+            return player;
+        }
 
         public List<WorldLine> getLineQueue()
         {
             return lineQueue;
         }
 
-
         /// <summary>
         /// Adds a specific line to the end of the world.
         /// </summary>
-        /// <param name="lineNum"></param>
-        /// <returns></returns>
         public void addLine(int height)
         {
             lineQueue.Add(new WorldLine(height));
@@ -31,8 +48,6 @@ namespace GCA2
         /// <summary>
         /// Adds a specific line to the specified position of the  world.
         /// </summary>
-        /// <param name="lineNum"></param>
-        /// <returns></returns>
         public void addLine(int pos, int height)
         {
             lineQueue.Insert(pos, new WorldLine(height));
@@ -73,8 +88,12 @@ namespace GCA2
         /// <returns></returns>
         internal bool IsTouching(PlayerObject playerObject)
         {
-            // TODO: Check if the bottom middle point of the player is touching the world
-            return false;
+            if (playerObject.Position.Y > lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height)
+            {
+                return false;
+            }
+ 
+            return true;
         }
     }
 }

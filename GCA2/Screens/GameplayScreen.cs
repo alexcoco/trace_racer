@@ -41,7 +41,9 @@ namespace GCA2
         //tiles
         Texture2D tileGrass;
 
-        WorldObject world = new WorldObject();
+        WorldObject world;
+
+        Boolean hasStarted = false;
 
         Boolean isPressed = false;
         int pressedLastX = 0;
@@ -87,6 +89,8 @@ namespace GCA2
                 gameFont = content.Load<SpriteFont>("gamefont");
                 touchTexture = content.Load<Texture2D>("sprites/touch");
                 tileGrass = content.Load<Texture2D>("tiles/tileGrass");
+
+                world = new WorldObject(ScreenManager.Game, ScreenManager.SpriteBatch);
 
                 // create worldline queue
                 for (int i = 0; i < 800; i++)
@@ -178,8 +182,15 @@ namespace GCA2
                     }
                     else
                     {
+                        if (!hasStarted)
+                        {
+                            world.getPlayer().setActive();
+                            //TODO draw whole bottom till 0
+                        }
+
                         foreach (TouchLocation tl in touchCollection)
                         {
+                            hasStarted = true;
                             touchPosition.X = tl.Position.X;
                             touchPosition.Y = tl.Position.Y;
 
@@ -356,6 +367,7 @@ namespace GCA2
                     spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
                 }
 
+                spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
                 spriteBatch.DrawString(gameFont,
                      "Tx: " + touchPosition.X
                    + "\nTy: " + touchPosition.Y
