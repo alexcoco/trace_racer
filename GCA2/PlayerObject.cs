@@ -83,50 +83,39 @@ namespace GCA2
             {
                 IsAlive = true;
             }
-
+            
             if (isActive)
             {
+                //Position.X++;
+                int difference = World.getPositionDifference();
                 // Check if touching the world
-                if (World.IsTouching(this))
+                if (difference == 0)
                 {
-                    // On the ground
-                    // TODO: update position depending on speed
-                    updateGroundPosition(gameTime.ElapsedGameTime.Milliseconds);
+                    // Do nothing
+                }
+                else if (difference < 0)
+                {
+                    // In the air
+                    Position.Y += 1;
+                    //updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
                 }
                 else
                 {
-                    // In the air
-                    updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
+                    // difference > 0
+                    // Collision
+                    if (Math.Abs(difference) > 5)
+                    {
+                        endGame();
+                    }
+                    do {
+                        //TODO: FINE TUNE THIS BITCH
+                        Position.Y--;
+                    } while (World.getPositionDifference() > 0);
                 }
+
                 base.Update(gameTime);
             }
         }
-
-        private void updateAirPosition(int elapsedGameTime)
-        {
-            Position.Y += 1;
-            if (World.IsColliding(this))
-            {
-                //END GAME!!
-            }
-        }
-
-        private void updateGroundPosition(int elapsedGameTime)
-        {
-            int currentLineNumber = ((int)Position.X + Texture.Bounds.Width / 2);
-            int difference = (World.getLine(currentLineNumber).Height - World.getLine(currentLineNumber + 1).Height);
-            //Speeding up, increase the position of the X value and Y (lower on the screen)
-            if (difference > 0)
-            {
-                Position.Y++;
-            }//If the next line is higher, raise the position of the biker
-            else if (difference < 0)
-            {
-                Position.Y -= 1;
-            }//if its the same height do nothing!
-
-        }
-
 
         /// <summary>
         /// Draws the player on the screen.
@@ -142,6 +131,13 @@ namespace GCA2
             }
 
             base.Draw(gameTime);
+        }
+        /// <summary>
+        /// This method will end the game.
+        /// </summary>
+        private void endGame()
+        {
+
         }
     }
 }

@@ -115,5 +115,12 @@ namespace GCA2
 
             return false;
         }
+
+        public int getPositionDifference()
+        {
+            int value = (int)player.Position.Y + player.Texture.Height;
+            value += lineQueue[(int)player.Position.X + player.Texture.Width / 2].Height;
+            return value - TouchPanel.DisplayHeight;
+        }
     }
 }
