@@ -28,6 +28,8 @@ namespace GCA2
         public Score Score { get; set; }
         Boolean isActive = false;
 
+        int parabolaCounter = 0;
+
         private SpriteBatch mySpriteBatch;
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace GCA2
             {
                 IsAlive = true;
             }
-            
+
             if (isActive)
             {
                 //Position.X++;
@@ -91,30 +93,33 @@ namespace GCA2
                 // Check if touching the world
                 if (difference == 0)
                 {
-                    // Do nothing
+                    int currentLine = ((int)this.Position.X + this.Texture.Width / 2);
+                    if (World.getLine(currentLine).Height > World.getLine(currentLine - 1).Height)
+                    {
+                        if (World.getLine(currentLine).Height >= World.getLine(currentLine + 1).Height)
+                        {
+                            // going into air from an edge
+                            parabolaCounter = 0;
+                        }
+
+                    }
+                    Position.Y--;
+
                 }
                 else if (difference < 0)
                 {
-                    // In the air
-                    //part 1
-                    int currentLine = (int)this.Position.X+ this.Texture.Width/2;
-                    if(World.getLine(currentLine).Height > World.getLine(currentLine -1).Height)
-                    {
-                        if (World.getLine(currentLine).Height <= World.getLine(currentLine + 1).Height)
-                        {
-                            
-                        }
-                    }
 
-                    //part 2
-                    Position.Y += 3;
-                    int diff2 = World.getPositionDifference();
+                    Position.Y -= (float)(-Math.Pow((parabolaCounter - 0.5 ), 2.0) + 1);
+                    parabolaCounter++;
 
-                    while (diff2 > 0)
-                    {
-                        Position.Y -= 1;
-                        diff2 = World.getPositionDifference();
-                    }
+                    // Position.Y += 3;
+                    //int diff2 = World.getPositionDifference();
+
+                    //                    while (diff2 > 0)
+                    //                  {
+                    //                    Position.Y -= 1;
+                    //                  diff2 = World.getPositionDifference();
+                    //            }
                 }
                 else
                 {
@@ -124,7 +129,8 @@ namespace GCA2
                     {
                         endGame();
                     }
-                    do {
+                    do
+                    {
                         //TODO: FINE TUNE THIS BITCH
                         Position.Y--;
                     } while (World.getPositionDifference() > 0);

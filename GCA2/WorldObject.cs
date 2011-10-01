@@ -78,7 +78,7 @@ namespace GCA2
             // Do bounds check first
             if (lineNum >= lineQueue.Count)
             {
-                return new WorldLine(10);//TODO LAWL!!!
+                return new WorldLine(10);
             }
             return lineQueue[lineNum];
         }
