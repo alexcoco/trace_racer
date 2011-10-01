@@ -20,18 +20,26 @@ namespace GCA2
     {
         public bool IsAlive { get; set; }
         public Texture2D Texture { get; set; }
-        public Rectangle Rectangle { get; set; }
+        //public Rectangle Rectangle { get; set; } // we could use Texture.Bounds instead
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
+        public WorldObject World { get; set; }
         public WorldLine CurrentLine { get; set; }
         public Score Score { get; set; }
 
-        public PlayerObject(Game game)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="world"></param>
+        public PlayerObject(Game game, WorldObject world)
             : base(game)
         {
+            World = world;
             IsAlive = true;
             Position = Vector2.Zero;
-            Rectangle = Texture.Bounds;
+            Speed = Vector2.Zero;
+            CurrentLine = world.getLine((int )Position.X);
         }
 
         /// <summary>

@@ -80,6 +80,7 @@
     <Compile Include="Screens\PhoneMenuScreen.cs" />
     <Compile Include="Screens\PhonePauseScreen.cs" />
     <Compile Include="WorldLine.cs" />
+    <Compile Include="WorldObject.cs" />
     <None Include="Properties\AppManifest.xml">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </None>
