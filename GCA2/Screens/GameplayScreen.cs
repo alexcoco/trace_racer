@@ -202,7 +202,7 @@ namespace GCA2
                                             if (pressedLastY < touchPosition.Y)
                                             {
                                                 // Decreasing
-                                                newLineY = (int) touchPosition.Y;
+                                                newLineY = (int)touchPosition.Y;
                                             }
                                             else if (pressedLastY > touchPosition.Y)
                                             {
@@ -330,7 +330,7 @@ namespace GCA2
 
                 if (movement.Length() > 1)
                     movement.Normalize();
-
+                
                 //playerPosition += movement * 8f;
             }
         }
@@ -355,9 +355,15 @@ namespace GCA2
                 {
                     spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
                 }
-            
-                spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 15), Color.White);
+
+                spriteBatch.DrawString(gameFont,
+                     "Tx: " + touchPosition.X
+                   + "\nTy: " + touchPosition.Y
+                   + "\nNy: " + newLineY
+                   + "\nPx: " + pressedLastX
+                   + "\nPy: " + pressedLastY,
+                   new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.
