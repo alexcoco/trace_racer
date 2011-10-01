@@ -121,7 +121,7 @@ namespace GCA2
         private void updateGroundPosition(int elapsedGameTime)
         {
             int currentLineNumber = ((int)Position.X + Texture.Bounds.Width / 2);
-            int difference = (World.getLine(currentLineNumber).Height - World.getLine(currentLineNumber + 2).Height);
+            int difference = (World.getLine(currentLineNumber).Height - World.getLine(currentLineNumber + 1).Height);
             //Speeding up, increase the position of the X value and Y (lower on the screen)
             if (difference > 0)
             {
@@ -129,7 +129,7 @@ namespace GCA2
             }//If the next line is higher, raise the position of the biker
             else if (difference < 0)
             {
-                Position.Y--;
+                Position.Y -= 1;
             }//if its the same height do nothing!
 
         }
