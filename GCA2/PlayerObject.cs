@@ -96,8 +96,15 @@ namespace GCA2
                 else if (difference < 0)
                 {
                     // In the air
-                    Position.Y += 1;
-                    //updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
+
+                    Position.Y += 3;
+                    int diff2 = World.getPositionDifference();
+
+                    while (diff2 > 0)
+                    {
+                        Position.Y -= 1;
+                        diff2 = World.getPositionDifference();
+                    }
                 }
                 else
                 {
