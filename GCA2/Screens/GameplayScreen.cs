@@ -80,6 +80,8 @@ namespace GCA2
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
 
+                TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap | GestureType.Hold;
+
                 gameFont = content.Load<SpriteFont>("gamefont");
                 touchTexture = content.Load<Texture2D>("sprites/touch");
                 tileGrass = content.Load<Texture2D>("tiles/tileGrass");
@@ -171,7 +173,7 @@ namespace GCA2
 
                         lineQueue.RemoveAt(0);
 
-                        if ((TouchPanel.ReadGesture().GestureType == GestureType.Hold) || (tl.State == TouchLocationState.Moved))
+                        if ((TouchPanel.ReadGesture().GestureType == GestureType.Hold))
                         {
                             isPressed = true;
                             lineQueue.Add(new WorldLine(480 - (int)touchPosition.Y));
