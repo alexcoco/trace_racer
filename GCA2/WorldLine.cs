@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace GCA2
+{
+    /// <summary>
+    /// A line is the most basic component of the world.
+    /// </summary>
+    class WorldLine
+    {
+    }
+}
