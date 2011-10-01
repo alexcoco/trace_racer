@@ -34,7 +34,7 @@ namespace GCA2
 
             graphics = new GraphicsDeviceManager(this);
             //TargetElapsedTime = TimeSpan.FromTicks(333333);
-            TargetElapsedTime = TimeSpan.FromTicks(1);
+            TargetElapsedTime = TimeSpan.FromTicks(333);
 
 #if WINDOWS_PHONE
             graphics.IsFullScreen = true;

@@ -140,11 +140,11 @@ namespace GCA2
             // repeating clouds
             Texture2D layerTexture = content.Load<Texture2D>("sprites/happycloud1");
             Rectangle rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 50.0f, true, layerTexture, new Vector2(800, 10), rect);
+            parallaxManager.AddLayer(0, 50.0f, true, layerTexture, new Vector2(800 + layerTexture.Width, 10), rect);
 
             layerTexture = content.Load<Texture2D>("sprites/happycloud1");
             rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 10.0f, true, layerTexture, new Vector2(800, 15), rect);
+            parallaxManager.AddLayer(0, 10.0f, true, layerTexture, new Vector2(800 + layerTexture.Width, 15), rect);
 
             ScreenManager.Game.Components.Add(parallaxManager);
         }
@@ -199,110 +199,113 @@ namespace GCA2
             {
                 #region GAME LOGIC
 
-                TouchCollection touchCollection = TouchPanel.GetState();
-
-                world.removeLine(0);
-                pressedLastX--;
-
-                if (touchCollection.Count == 0)
+                for (int i = 0; i < gameTime.ElapsedGameTime.Milliseconds; i++)
                 {
-                    isPressed = false;
-                    world.addLine(-1);
-                }
-                else
-                {
-                    foreach (TouchLocation tl in touchCollection)
+                    TouchCollection touchCollection = TouchPanel.GetState();
+
+                    world.removeLine(0);
+                    pressedLastX--;
+
+                    if (touchCollection.Count == 0)
                     {
-                        if (!hasStarted)
+                        isPressed = false;
+                        world.addLine(-1);
+                    }
+                    else
+                    {
+                        foreach (TouchLocation tl in touchCollection)
                         {
-                            world.getPlayer().setActive();
-                            world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
-                            hasStarted = true;
-                        }
-
-                        touchPosition.X = tl.Position.X;
-                        touchPosition.Y = tl.Position.Y;
-
-                        if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
-                        {
-                            if (world.getLineQueue()[(int)Math.Max(1, pressedLastX) - 1].Height == -1)
+                            if (!hasStarted)
                             {
-                                pressedLastY = (int)touchPosition.Y;
+                                world.getPlayer().setActive();
+                                world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
+                                hasStarted = true;
                             }
-                            if (touchPosition.X > pressedLastX)
+
+                            touchPosition.X = tl.Position.X;
+                            touchPosition.Y = tl.Position.Y;
+
+                            if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                             {
-                                for (; pressedLastX < touchPosition.X; pressedLastX++)
+                                if (world.getLineQueue()[(int)Math.Max(1, pressedLastX) - 1].Height == -1)
                                 {
-                                    if (pressedLastY == 0)
-                                    {
-                                        pressedLastY = (int)touchPosition.Y;
-                                    }
-
-                                    newLineY = pressedLastY;
-
-                                    if (isPressed)
-                                    {
-                                        if (pressedLastY < touchPosition.Y)
-                                        {
-                                            // Decreasing
-                                            newLineY = (int)touchPosition.Y;
-                                        }
-                                        else if (pressedLastY > touchPosition.Y)
-                                        {
-                                            // Increasing
-                                            newLineY -= 2;
-                                        }
-                                        else
-                                        {
-                                            // No change
-                                            // Do nothing
-                                        }
-
-                                        world.addLine(pressedLastX, TouchPanel.DisplayHeight - newLineY);
-                                        pressedLastY = newLineY;
-                                    }
+                                    pressedLastY = (int)touchPosition.Y;
                                 }
-                                /*
-                                lineQueue.Insert((int)touchPosition.X, new WorldLine(480 - (int)touchPosition.Y));
-                                if (isPressed) // is touch being held?
+                                if (touchPosition.X > pressedLastX)
                                 {
-                                    int diffx = Math.Abs(pressedLastX - (int)touchPosition.X);
-                                    int diffy = Math.Abs(pressedLastY - (int)touchPosition.Y);
-                                    int step = 0;
-                                    if (diffx > 0 & diffy > 0)
+                                    for (; pressedLastX < touchPosition.X; pressedLastX++)
                                     {
-                                        step = Math.Max(diffx, diffy) / Math.Min(diffx, diffy);
-
-                                        for (int i = pressedLastX - 1; i < (int)touchPosition.X; i++)
+                                        if (pressedLastY == 0)
                                         {
-                                            lineQueue.RemoveAt(i);
-                                            if (diffx > diffy)
+                                            pressedLastY = (int)touchPosition.Y;
+                                        }
+
+                                        newLineY = pressedLastY;
+
+                                        if (isPressed)
+                                        {
+                                            if (pressedLastY < touchPosition.Y)
                                             {
-                                                for (int j = 0; j < step; j++)
-                                                {
-                                                    lineQueue.Insert(i, new WorldLine(480 - pressedLastY + j));
-                                                    i += j;
-                                                }
+                                                // Decreasing
+                                                newLineY = (int)touchPosition.Y;
+                                            }
+                                            else if (pressedLastY > touchPosition.Y)
+                                            {
+                                                // Increasing
+                                                newLineY -= 2;
                                             }
                                             else
                                             {
-                                                lineQueue.Insert(i, new WorldLine(480 - pressedLastY + step));
+                                                // No change
+                                                // Do nothing
+                                            }
+
+                                            world.addLine(pressedLastX, TouchPanel.DisplayHeight - newLineY);
+                                            pressedLastY = newLineY;
+                                        }
+                                    }
+                                    /*
+                                    lineQueue.Insert((int)touchPosition.X, new WorldLine(480 - (int)touchPosition.Y));
+                                    if (isPressed) // is touch being held?
+                                    {
+                                        int diffx = Math.Abs(pressedLastX - (int)touchPosition.X);
+                                        int diffy = Math.Abs(pressedLastY - (int)touchPosition.Y);
+                                        int step = 0;
+                                        if (diffx > 0 & diffy > 0)
+                                        {
+                                            step = Math.Max(diffx, diffy) / Math.Min(diffx, diffy);
+
+                                            for (int i = pressedLastX - 1; i < (int)touchPosition.X; i++)
+                                            {
+                                                lineQueue.RemoveAt(i);
+                                                if (diffx > diffy)
+                                                {
+                                                    for (int j = 0; j < step; j++)
+                                                    {
+                                                        lineQueue.Insert(i, new WorldLine(480 - pressedLastY + j));
+                                                        i += j;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    lineQueue.Insert(i, new WorldLine(480 - pressedLastY + step));
+                                                }
                                             }
                                         }
                                     }
+                                    pressedLastX = (int)touchPosition.X;
+                                    pressedLastY = (int)touchPosition.Y;
+                                    */
                                 }
-                                pressedLastX = (int)touchPosition.X;
-                                pressedLastY = (int)touchPosition.Y;
-                                */
+                                else
+                                {
+                                    world.addLine(-1);
+                                }
+                                isPressed = true;
                             }
-                            else
-                            {
-                                world.addLine(-1);
-                            }
-                            isPressed = true;
-                        }
 
-                        break;
+                            break;
+                        }
                     }
                 }
                 #endregion

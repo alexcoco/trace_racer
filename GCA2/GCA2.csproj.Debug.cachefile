@@ -12,7 +12,7 @@ Content\menufont.xnb
 Content\tiles\WorldLineTexture.xnb
 Content\tiles\WorldLineTextureBlur.xnb
 Content\sprites\happycloud1.xnb
-Content\bg\background.xnb
+Content\bg\background_sun.xnb
 Content\gates\gate-closed-1.xnb
 Content\gates\gate-closed-ng0.xnb
 Content\gates\gate-closed-ng1.xnb
@@ -25,4 +25,4 @@ Content\gates\gate0.xnb
 Content\gates\gate00.xnb
 Content\gates\gate1.xnb
 Content\gates\gate11.xnb
-Content\bg\background_sun.xnb
+Content\bg\background.xnb
