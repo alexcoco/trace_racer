@@ -7,8 +7,6 @@ Content\sprites\helpImage_1.xnb
 Content\sprites\helpImage_2.xnb
 Content\sprites\touch.xnb
 Content\bike.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
 Content\tiles\WorldLineTexture.xnb
 Content\tiles\WorldLineTextureBlur.xnb
 Content\sprites\happycloud1.xnb
@@ -26,3 +24,5 @@ Content\gates\gate00.xnb
 Content\gates\gate1.xnb
 Content\gates\gate11.xnb
 Content\bg\background.xnb
+Content\gamefont.xnb
+Content\menufont.xnb
