@@ -174,7 +174,7 @@ namespace GCA2
 
                     world.removeLine(0);
                     pressedLastX--;
-
+                 
                     if (touchCollection.Count == 0)
                     {
                         isPressed = false;
@@ -187,7 +187,7 @@ namespace GCA2
                             if (!hasStarted)
                             {
                                 world.getPlayer().setActive();
-                                world.fillBegin((int)tl.Position.X, 480 - (int)tl.Position.Y);
+                                world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
                                 hasStarted = true;
                             }
 

@@ -96,7 +96,17 @@ namespace GCA2
                 else if (difference < 0)
                 {
                     // In the air
+                    //part 1
+                    int currentLine = (int)this.Position.X+ this.Texture.Width/2;
+                    if(World.getLine(currentLine).Height > World.getLine(currentLine -1).Height)
+                    {
+                        if (World.getLine(currentLine).Height <= World.getLine(currentLine + 1).Height)
+                        {
+                            
+                        }
+                    }
 
+                    //part 2
                     Position.Y += 3;
                     int diff2 = World.getPositionDifference();
 
