@@ -101,7 +101,7 @@ namespace GCA2
         /// <returns></returns>
         internal bool IsTouching(PlayerObject playerObject)
         {
-           if (playerObject.Position.Y + playerObject.Texture.Width == lineQueue[(int)playerObject.Position.X + playerObject.Texture.Height / 2].Height)
+           if (480 - playerObject.Position.Y + playerObject.Texture.Height == lineQueue[(int)playerObject.Position.X + (playerObject.Texture.Height / 2)].Height)
            {
               return true;
            }

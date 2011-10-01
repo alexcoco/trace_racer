@@ -363,7 +363,9 @@ namespace GCA2
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
             spriteBatch.Begin();
-                spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
+
+                if (isPressed)
+                    spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
                 for (int i = 0; i < world.getLineQueue().Count; i++)
                 {

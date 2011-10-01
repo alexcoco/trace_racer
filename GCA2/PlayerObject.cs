@@ -115,8 +115,7 @@ namespace GCA2
 
         private void updateAirPosition(int elapsedGameTime)
         {
-           Position.Y++;
-           
+           Position.Y += 1; 
         }
 
         private void updateGroundPosition(int elapsedGameTime)
