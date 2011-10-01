@@ -10,6 +10,39 @@ namespace GCA2
     /// </summary>
     public class WorldObject
     {
+        List<WorldLine> lineQueue = new List<WorldLine>(800);
+
+        public List<WorldLine> getLineQueue()
+        {
+            return lineQueue;
+        }
+
+
+        /// <summary>
+        /// Adds a specific line to the end of the world.
+        /// </summary>
+        /// <param name="lineNum"></param>
+        /// <returns></returns>
+        public void addLine(int height)
+        {
+            lineQueue.Add(new WorldLine(height));
+        }
+
+        /// <summary>
+        /// Adds a specific line to the specified position of the  world.
+        /// </summary>
+        /// <param name="lineNum"></param>
+        /// <returns></returns>
+        public void addLine(int pos, int height)
+        {
+            lineQueue.Insert(pos, new WorldLine(height));
+        }
+
+        public void removeLine(int pos)
+        {
+            lineQueue.RemoveAt(pos);
+        }
+
         /// <summary>
         /// Gets a specific line from the world.
         /// </summary>

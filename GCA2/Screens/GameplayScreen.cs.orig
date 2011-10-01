@@ -41,12 +41,11 @@ namespace GCA2
         //tiles
         Texture2D tileGrass;
 
-        WorldObject world = new WorldObject();
-
         Boolean isPressed = false;
         int pressedLastX = 0;
         int pressedLastY = 0;
 
+        List<WorldLine> lineQueue = new List<WorldLine>(800);
         Random random = new Random();
 
         float pauseAlpha;
@@ -91,7 +90,7 @@ namespace GCA2
                 // create worldline queue
                 for (int i = 0; i < 800; i++)
                 {
-                    world.addLine(-1);
+                    lineQueue.Add(new WorldLine());
                 }
 
 
@@ -168,13 +167,13 @@ namespace GCA2
 
                     TouchCollection touchCollection = TouchPanel.GetState();
 
-                    world.removeLine(0);
+                    lineQueue.RemoveAt(0);
                     pressedLastX--;
 
                     if (touchCollection.Count == 0)
                     {
                         isPressed = false;
-                        world.addLine(-1);
+                        lineQueue.Add(new WorldLine(-1));
                     }
                     else
                     {
@@ -215,7 +214,7 @@ namespace GCA2
                                                 // Do nothing
                                             }
 
-                                            world.addLine(pressedLastX, TouchPanel.DisplayHeight - newLineY);
+                                            lineQueue.Insert(pressedLastX, new WorldLine(TouchPanel.DisplayHeight - newLineY));
                                             pressedLastY = newLineY;
                                         }
                                     }
@@ -249,12 +248,16 @@ namespace GCA2
                                         }
                                     }
                                     pressedLastX = (int)touchPosition.X;
-                                    pressedLastY = (int)touchPosition.Y;
+<<<<<<< Updated upstream
+                                    pressedLastY++;
                                     */
+=======
+                                    pressedLastY = (int)touchPosition.Y;
+>>>>>>> Stashed changes
                                 }
                                 else
                                 {
-                                    world.addLine(-1);
+                                    lineQueue.Add(new WorldLine(-1));
                                 }
                                 isPressed = true;
                             }
@@ -351,9 +354,9 @@ namespace GCA2
             spriteBatch.Begin();
                 spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
-                for (int i = 0; i < world.getLineQueue().Count; i++)
+                for (int i = 0; i < lineQueue.Count; i++)
                 {
-                    spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
+                    spriteBatch.Draw(tileGrass, new Vector2(i, 480 - lineQueue[i].Height), Color.White);
                 }
             
                 spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
