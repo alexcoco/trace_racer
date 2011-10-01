@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Gate.cs" />
+    <Compile Include="ParallaxManager.cs" />
     <Compile Include="PlayerObject.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="ScreenFactory.cs" />

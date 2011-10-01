@@ -38,8 +38,17 @@ namespace GCA2
         //textures
         Texture2D touchTexture;
 
+        //sprites
+        Texture2D happyCloud1;
+
         //tiles
         Texture2D tileGrass;
+
+        // bg
+        Texture2D background;
+
+        // parallax mngr
+        ParallaxManager parallaxManager;
 
         WorldObject world;
 
@@ -89,6 +98,8 @@ namespace GCA2
                 gameFont = content.Load<SpriteFont>("gamefont");
                 touchTexture = content.Load<Texture2D>("sprites/touch");
                 tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
+                happyCloud1 = content.Load<Texture2D>("sprites/happyCloud1");
+                background = content.Load<Texture2D>("bg/background");
 
                 world = new WorldObject(ScreenManager.Game, ScreenManager.SpriteBatch);
 
@@ -98,6 +109,8 @@ namespace GCA2
                     world.addLine(-1);
                 }
 
+                // initiliaze parallax vars
+                InitParallex();
 
                 // A real game would probably have more content than this sample, so
                 // it would take longer to load. We simulate that by delaying for a
@@ -113,18 +126,34 @@ namespace GCA2
 #if WINDOWS_PHONE
             if (Microsoft.Phone.Shell.PhoneApplicationService.Current.State.ContainsKey("PlayerPosition"))
             {
-               // playerPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"];
-               // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
+                // playerPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"];
+                // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
 #endif
         }
 
+        private void InitParallex()
+        {
+            parallaxManager = new ParallaxManager(ScreenManager.Game);
+            parallaxManager.DrawOrder = 0;
+
+            // repeating clouds
+            Texture2D layerTexture = content.Load<Texture2D>("sprites/happycloud1");
+            Rectangle rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            parallaxManager.AddLayer(0, 50.0f, true, layerTexture, new Vector2(800, 10), rect);
+
+            layerTexture = content.Load<Texture2D>("sprites/happycloud1");
+            rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            parallaxManager.AddLayer(0, 10.0f, true, layerTexture, new Vector2(800, 15), rect);
+
+            ScreenManager.Game.Components.Add(parallaxManager);
+        }
 
         public override void Deactivate()
         {
 #if WINDOWS_PHONE
-           // Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"] = playerPosition;
-           // Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"] = enemyPosition;
+            // Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"] = playerPosition;
+            // Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"] = enemyPosition;
 #endif
 
             base.Deactivate();
@@ -170,112 +199,112 @@ namespace GCA2
             {
                 #region GAME LOGIC
 
-                    TouchCollection touchCollection = TouchPanel.GetState();
+                TouchCollection touchCollection = TouchPanel.GetState();
 
-                    world.removeLine(0);
-                    pressedLastX--;
-                 
-                    if (touchCollection.Count == 0)
+                world.removeLine(0);
+                pressedLastX--;
+
+                if (touchCollection.Count == 0)
+                {
+                    isPressed = false;
+                    world.addLine(-1);
+                }
+                else
+                {
+                    foreach (TouchLocation tl in touchCollection)
                     {
-                        isPressed = false;
-                        world.addLine(-1);
-                    }
-                    else
-                    {
-                        foreach (TouchLocation tl in touchCollection)
+                        if (!hasStarted)
                         {
-                            if (!hasStarted)
+                            world.getPlayer().setActive();
+                            world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
+                            hasStarted = true;
+                        }
+
+                        touchPosition.X = tl.Position.X;
+                        touchPosition.Y = tl.Position.Y;
+
+                        if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                        {
+                            if (world.getLineQueue()[(int)Math.Max(1, pressedLastX) - 1].Height == -1)
                             {
-                                world.getPlayer().setActive();
-                                world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
-                                hasStarted = true;
+                                pressedLastY = (int)touchPosition.Y;
                             }
-
-                            touchPosition.X = tl.Position.X;
-                            touchPosition.Y = tl.Position.Y;
-
-                            if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                            if (touchPosition.X > pressedLastX)
                             {
-                                if (world.getLineQueue()[(int)Math.Max(1, pressedLastX) - 1].Height == -1)
+                                for (; pressedLastX < touchPosition.X; pressedLastX++)
                                 {
-                                    pressedLastY = (int)touchPosition.Y;
-                                }
-                                if (touchPosition.X > pressedLastX)
-                                {
-                                    for (;pressedLastX < touchPosition.X; pressedLastX++)
+                                    if (pressedLastY == 0)
                                     {
-                                        if (pressedLastY == 0)
+                                        pressedLastY = (int)touchPosition.Y;
+                                    }
+
+                                    newLineY = pressedLastY;
+
+                                    if (isPressed)
+                                    {
+                                        if (pressedLastY < touchPosition.Y)
                                         {
-                                            pressedLastY = (int) touchPosition.Y;
+                                            // Decreasing
+                                            newLineY = (int)touchPosition.Y;
+                                        }
+                                        else if (pressedLastY > touchPosition.Y)
+                                        {
+                                            // Increasing
+                                            newLineY -= 2;
+                                        }
+                                        else
+                                        {
+                                            // No change
+                                            // Do nothing
                                         }
 
-                                        newLineY = pressedLastY;
+                                        world.addLine(pressedLastX, TouchPanel.DisplayHeight - newLineY);
+                                        pressedLastY = newLineY;
+                                    }
+                                }
+                                /*
+                                lineQueue.Insert((int)touchPosition.X, new WorldLine(480 - (int)touchPosition.Y));
+                                if (isPressed) // is touch being held?
+                                {
+                                    int diffx = Math.Abs(pressedLastX - (int)touchPosition.X);
+                                    int diffy = Math.Abs(pressedLastY - (int)touchPosition.Y);
+                                    int step = 0;
+                                    if (diffx > 0 & diffy > 0)
+                                    {
+                                        step = Math.Max(diffx, diffy) / Math.Min(diffx, diffy);
 
-                                        if (isPressed)
+                                        for (int i = pressedLastX - 1; i < (int)touchPosition.X; i++)
                                         {
-                                            if (pressedLastY < touchPosition.Y)
+                                            lineQueue.RemoveAt(i);
+                                            if (diffx > diffy)
                                             {
-                                                // Decreasing
-                                                newLineY = (int)touchPosition.Y;
-                                            }
-                                            else if (pressedLastY > touchPosition.Y)
-                                            {
-                                                // Increasing
-                                                newLineY-= 2;
+                                                for (int j = 0; j < step; j++)
+                                                {
+                                                    lineQueue.Insert(i, new WorldLine(480 - pressedLastY + j));
+                                                    i += j;
+                                                }
                                             }
                                             else
                                             {
-                                                // No change
-                                                // Do nothing
-                                            }
-
-                                            world.addLine(pressedLastX, TouchPanel.DisplayHeight - newLineY);
-                                            pressedLastY = newLineY;
-                                        }
-                                    }
-                                    /*
-                                    lineQueue.Insert((int)touchPosition.X, new WorldLine(480 - (int)touchPosition.Y));
-                                    if (isPressed) // is touch being held?
-                                    {
-                                        int diffx = Math.Abs(pressedLastX - (int)touchPosition.X);
-                                        int diffy = Math.Abs(pressedLastY - (int)touchPosition.Y);
-                                        int step = 0;
-                                        if (diffx > 0 & diffy > 0)
-                                        {
-                                            step = Math.Max(diffx, diffy) / Math.Min(diffx, diffy);
-
-                                            for (int i = pressedLastX - 1; i < (int)touchPosition.X; i++)
-                                            {
-                                                lineQueue.RemoveAt(i);
-                                                if (diffx > diffy)
-                                                {
-                                                    for (int j = 0; j < step; j++)
-                                                    {
-                                                        lineQueue.Insert(i, new WorldLine(480 - pressedLastY + j));
-                                                        i += j;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    lineQueue.Insert(i, new WorldLine(480 - pressedLastY + step));
-                                                }
+                                                lineQueue.Insert(i, new WorldLine(480 - pressedLastY + step));
                                             }
                                         }
                                     }
-                                    pressedLastX = (int)touchPosition.X;
-                                    pressedLastY = (int)touchPosition.Y;
-                                    */
                                 }
-                                else
-                                {
-                                    world.addLine(-1);
-                                }
-                                isPressed = true;
+                                pressedLastX = (int)touchPosition.X;
+                                pressedLastY = (int)touchPosition.Y;
+                                */
                             }
-
-                            break;
+                            else
+                            {
+                                world.addLine(-1);
+                            }
+                            isPressed = true;
                         }
+
+                        break;
                     }
+                }
                 #endregion
             }
         }
@@ -344,7 +373,7 @@ namespace GCA2
 
                 if (movement.Length() > 1)
                     movement.Normalize();
-                
+
                 //playerPosition += movement * 8f;
             }
         }
@@ -355,32 +384,33 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            // This game has a blue background. Why? Because!
-            ScreenManager.GraphicsDevice.Clear(ClearOptions.Target,
-                                               Color.CornflowerBlue, 0, 0);
+
 
             // Our player and enemy are both actually just text strings.
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
             spriteBatch.Begin();
+            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+            //spriteBatch.Draw(happyCloud1, new Vector2(10, 10), new Rectangle(-1, 0, happyCloud1.Width, happyCloud1.Height), Color.White);
 
-                if (isPressed)
-                    spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
-                for (int i = 0; i < world.getLineQueue().Count; i++)
-                {
-                    spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
-                }
+            if (isPressed)
+                spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
-                spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(gameFont,
-                     "Tx: " + touchPosition.X
-                   + "\nTy: " + touchPosition.Y
-                   + "\nNy: " + newLineY
-                   + "\nPx: " + pressedLastX
-                   + "\nPy: " + pressedLastY,
-                   new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
+            for (int i = 0; i < world.getLineQueue().Count; i++)
+            {
+                spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
+            }
+
+            spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(gameFont,
+                 "Tx: " + touchPosition.X
+               + "\nTy: " + touchPosition.Y
+               + "\nNy: " + newLineY
+               + "\nPx: " + pressedLastX
+               + "\nPy: " + pressedLastY,
+               new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.
