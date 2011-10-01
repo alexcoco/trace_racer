@@ -21,5 +21,27 @@ namespace GCA2
 
             return new WorldLine(10);
         }
+
+        /// <summary>
+        /// Collision detection between world and player.
+        /// </summary>
+        /// <param name="playerObject"></param>
+        /// <returns></returns>
+        public bool IsColliding(PlayerObject playerObject)
+        {
+            // TODO: Add collision detection between world and player
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if player touches the top of the world.
+        /// </summary>
+        /// <param name="playerObject"></param>
+        /// <returns></returns>
+        internal bool IsTouching(PlayerObject playerObject)
+        {
+            // TODO: Check if the bottom middle point of the player is touching the world
+            return false;
+        }
     }
 }

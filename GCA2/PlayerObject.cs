@@ -22,24 +22,30 @@ namespace GCA2
         public Texture2D Texture { get; set; }
         //public Rectangle Rectangle { get; set; } // we could use Texture.Bounds instead
         public Vector2 Position { get; set; }
-        public Vector2 Speed { get; set; }
+        public Vector2 Speed { get; set; } // Will be used for positioning
         public WorldObject World { get; set; }
         public WorldLine CurrentLine { get; set; }
         public Score Score { get; set; }
 
+        private SpriteBatch mySpriteBatch;
+
         /// <summary>
-        /// Constructor
+        /// Constructor initializes everything.
         /// </summary>
         /// <param name="game"></param>
         /// <param name="world"></param>
-        public PlayerObject(Game game, WorldObject world)
+        public PlayerObject(Game game, SpriteBatch givenSpriteBatch, WorldObject world)
             : base(game)
         {
             World = world;
+            mySpriteBatch = givenSpriteBatch;
+            
             IsAlive = true;
-            Position = Vector2.Zero;
-            Speed = Vector2.Zero;
-            CurrentLine = world.getLine((int )Position.X);
+            Texture = Game.Content.Load<Texture2D>("bike");
+
+            Speed = new Vector2(Constants.NORMAL_SPEED, 0);
+            Position = new Vector2(Speed.X, -Texture.Height);
+            CurrentLine = world.getLine((int)Position.X);
         }
 
         /// <summary>
@@ -59,21 +65,52 @@ namespace GCA2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            // Check if colliding with the world
+            if (World.IsColliding(this))
+            {
+                // End Game
+            }
+            else
+            {
+                // Check if touching the world
+                if (World.IsTouching(this))
+                {
+                    // On the ground
+                    // TODO: update position depending on speed
+                    updateGroundPosition(gameTime.ElapsedGameTime.Milliseconds);
+                }
+                else
+                {
+                    // In the air
+                    updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
+                }
+            }
 
             base.Update(gameTime);
         }
 
+        private void updateAirPosition(int elapsedGameTime)
+        {
+            // TODO
+            Position = new Vector2(Position.X, Position.Y);
+        }
+
+        private void updateGroundPosition(int elapsedGameTime)
+        {
+            // TODO
+            Position = new Vector2(Position.X, Position.Y);
+        }
+
 
         /// <summary>
-        /// 
+        /// Draws the player on the screen.
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
             if (this.IsAlive)
             {
-                //mySpriteBatch.Draw(texture, position, Color.White);
+                mySpriteBatch.Draw(Texture, Position, Color.White);
             }
 
             base.Draw(gameTime);
