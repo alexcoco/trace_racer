@@ -87,7 +87,9 @@ namespace GCA2
         /// <returns></returns>
         public bool IsColliding(PlayerObject playerObject)
         {
-            if (playerObject.Position.Y > lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height)
+            int value = (int)playerObject.Position.Y + playerObject.Texture.Height;
+            value += lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height;
+            if (value > TouchPanel.DisplayHeight)
             {
                 return true;
             }
@@ -101,8 +103,11 @@ namespace GCA2
         /// <returns></returns>
         internal bool IsTouching(PlayerObject playerObject)
         {
-           if (480 - playerObject.Position.Y + playerObject.Texture.Height == lineQueue[(int)playerObject.Position.X + (playerObject.Texture.Height / 2)].Height)
-           {
+         //  if (TouchPanel.DisplayHeight -(playerObject.Position.Y + playerObject.Texture.Width) == lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height)
+            int value = (int)playerObject.Position.Y + playerObject.Texture.Height;
+            value += lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height;
+          if(value == TouchPanel.DisplayHeight)
+            {
               return true;
            }
             
