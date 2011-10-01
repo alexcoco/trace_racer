@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{8AAFC098-E9CD-42EA-8240-E4C99270EC63}</ProjectGuid>
@@ -59,22 +59,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sprites\touch.png">
-      <Name>touch</Name>
+    <Compile Include="sprites\helpImage_0.png">
+      <Name>helpImage_0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="tiles\tileGrass.png">
-      <Name>tileGrass</Name>
+    <Compile Include="sprites\helpImage_3.png">
+      <Name>helpImage_3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bike.png">
-      <Name>bike</Name>
+    <Compile Include="sprites\helpImage_1.png">
+      <Name>helpImage_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="sprites\helpImage_2.png">
+      <Name>helpImage_2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
