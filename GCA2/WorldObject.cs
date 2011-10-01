@@ -12,7 +12,7 @@ namespace GCA2
     /// <summary>
     /// Keeps track of the world that the user builds.
     /// </summary>
-    public class WorldObject
+    public class WorldObject : DrawableGameComponent
     {
         Game game;
         SpriteBatch spriteBatch;
@@ -21,7 +21,7 @@ namespace GCA2
 
         public PlayerObject player;
 
-        public WorldObject(Game g, SpriteBatch sb)
+        public WorldObject(Game g, SpriteBatch sb) : base(g)
         {
             game = g;
             spriteBatch = sb;
