@@ -40,8 +40,8 @@ namespace GCA2
         {
             World = world;
             mySpriteBatch = givenSpriteBatch;
-            
-            IsAlive = true;
+
+            IsAlive = false;
             Texture = Game.Content.Load<Texture2D>("bike");
 
             Speed = new Vector2(Constants.NORMAL_SPEED, 0);
@@ -78,12 +78,20 @@ namespace GCA2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            TouchCollection touchCollection = TouchPanel.GetState();
+            if (touchCollection.Count != 0)
+            {
+                IsAlive = true;
+            }
+
             if (isActive)
-            {   
+            {
+              
                 // Check if colliding with the world
                 if (World.IsColliding(this))
                 {
                     // End Game
+                    
                 }
                 else
                 {
@@ -107,14 +115,25 @@ namespace GCA2
 
         private void updateAirPosition(int elapsedGameTime)
         {
-            Position.Y--;
-            //Position = new Vector2(Position.X, Position.Y--);
+           Position.Y++;
+           
         }
 
         private void updateGroundPosition(int elapsedGameTime)
         {
-            // TODO
-            Position = new Vector2(Position.X, Position.Y);
+            // TODO 
+            //Speeding up, increase the position of the X value and Y (lower on the screen)
+            if((CurrentLine.Height - World.getLine((int)Position.X + Texture.Bounds.Width/2).Height+1) > 0)
+            {
+                Position.X++;
+                Position.Y++;
+            }//If the next line is higher, raise the position of the biker
+            else if ((CurrentLine.Height - World.getLine((int)Position.X + Texture.Bounds.Width / 2).Height + 1) < 0)
+            {
+                Position.Y--;
+                Position.X--;
+            }//if its the same height do nothing!
+            
         }
 
 

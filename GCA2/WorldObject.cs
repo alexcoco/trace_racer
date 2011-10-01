@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace GCA2
 {
@@ -77,7 +79,10 @@ namespace GCA2
         /// <returns></returns>
         public bool IsColliding(PlayerObject playerObject)
         {
-            // TODO: Add collision detection between world and player
+            if (playerObject.Position.Y > lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -88,12 +93,12 @@ namespace GCA2
         /// <returns></returns>
         internal bool IsTouching(PlayerObject playerObject)
         {
-            if (playerObject.Position.Y > lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height)
-            {
-                return false;
-            }
- 
-            return true;
+           if (playerObject.Position.Y + playerObject.Texture.Width == lineQueue[(int)playerObject.Position.X + playerObject.Texture.Height / 2].Height)
+           {
+              return true;
+           }
+            
+            return false;
         }
     }
 }
