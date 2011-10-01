@@ -27,8 +27,7 @@ namespace GCA2
         public WorldLine CurrentLine { get; set; }
         public Score Score { get; set; }
         Boolean isActive = false;
-
-        int parabolaCounter = 0;
+        int airtime = 0;
 
         private SpriteBatch mySpriteBatch;
 
@@ -48,7 +47,7 @@ namespace GCA2
 
             Speed = new Vector2(Constants.NORMAL_SPEED, 0);
             //Position = new Vector2(Speed.X, -Texture.Height);
-            Position = new Vector2(10, -Texture.Height);
+            Position = new Vector2(100, -Texture.Height);
             CurrentLine = world.getLine((int)Position.X);
         }
 
@@ -94,18 +93,14 @@ namespace GCA2
                 // Check if touching the world
                 if (difference == 0)
                 {
-                    
-
+                    // Touching world
+                    airtime = 0;
                 }
                 else if (difference < 0)
                 {
-
-                    //  Position.Y -= (float)(-Math.Pow((parabolaCounter - 0.5 ), 2.0) + 1);
-                    // parabolaCounter++;
-                    //5t+((-3t^2)/2)
-                    //Position.Y -= (float)((5 * parabolaCounter) + (-Math.Pow(3.0 * parabolaCounter, 2.0)) / 2.0);
-                    //parabolaCounter++;
-                    Position.Y += 3;
+                    airtime++;
+                    // In the air
+                    Position.Y += (airtime / (4 * gameTime.ElapsedGameTime.Milliseconds));
                     int diff2 = World.getPositionDifference();
 
                     while (diff2 > 0)
@@ -114,10 +109,11 @@ namespace GCA2
                         diff2 = World.getPositionDifference();
                     }
                 }
-                else
+                else // difference > 0
                 {
-                    // difference > 0
                     // Collision
+                    airtime = 0;
+
                     if (Math.Abs(difference) > 5)
                     {
                         endGame();
