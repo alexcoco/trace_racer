@@ -86,29 +86,18 @@ namespace GCA2
 
             if (isActive)
             {
-
-                // Check if colliding with the world
-                if (World.IsColliding(this))
+                // Check if touching the world
+                if (World.IsTouching(this))
                 {
-                    // End Game
-
+                    // On the ground
+                    // TODO: update position depending on speed
+                    updateGroundPosition(gameTime.ElapsedGameTime.Milliseconds);
                 }
                 else
                 {
-                    // Check if touching the world
-                    if (World.IsTouching(this))
-                    {
-                        // On the ground
-                        // TODO: update position depending on speed
-                        updateGroundPosition(gameTime.ElapsedGameTime.Milliseconds);
-                    }
-                    else
-                    {
-                        // In the air
-                        updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
-                    }
+                    // In the air
+                    updateAirPosition(gameTime.ElapsedGameTime.Milliseconds);
                 }
-
                 base.Update(gameTime);
             }
         }
@@ -116,6 +105,10 @@ namespace GCA2
         private void updateAirPosition(int elapsedGameTime)
         {
             Position.Y += 1;
+            if (World.IsColliding(this))
+            {
+                //END GAME!!
+            }
         }
 
         private void updateGroundPosition(int elapsedGameTime)

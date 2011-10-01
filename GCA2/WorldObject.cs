@@ -106,14 +106,13 @@ namespace GCA2
         /// <returns></returns>
         internal bool IsTouching(PlayerObject playerObject)
         {
-         //  if (TouchPanel.DisplayHeight -(playerObject.Position.Y + playerObject.Texture.Width) == lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height)
             int value = (int)playerObject.Position.Y + playerObject.Texture.Height;
             value += lineQueue[(int)playerObject.Position.X + playerObject.Texture.Width / 2].Height;
             if (value == TouchPanel.DisplayHeight)
             {
-              return true;
-           }
-            
+                return true;
+            }
+
             return false;
         }
     }
