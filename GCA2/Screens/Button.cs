@@ -71,7 +71,7 @@ namespace GCA2
         /// <summary>
         /// The size of the button.
         /// </summary>
-        public Vector2 Size = new Vector2(250, 75);
+        public Vector2 Size = new Vector2(150, 50);
 
         /// <summary>
         /// The thickness of the border drawn for the button.

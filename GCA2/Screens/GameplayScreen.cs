@@ -41,6 +41,8 @@ namespace GCA2
         //tiles
         Texture2D tileGrass;
 
+        Boolean isPressed = false;
+
         List<WorldLine> lineQueue = new List<WorldLine>(800);
         Random random = new Random();
 
@@ -166,11 +168,25 @@ namespace GCA2
                     {
                         touchPosition.X = tl.Position.X;
                         touchPosition.Y = tl.Position.Y;
+
+                        lineQueue.RemoveAt(0);
+
+                        if ((TouchPanel.ReadGesture().GestureType == GestureType.Hold) || (tl.State == TouchLocationState.Moved))
+                        {
+                            isPressed = true;
+                            lineQueue.Add(new WorldLine(480 - (int)touchPosition.Y));
+                        }
+                        else
+                        {
+                            isPressed = false;
+                            lineQueue.Add(new WorldLine(-1));
+                        }
+                        break;
                     }
 
-   
 
-                    
+
+
 
                 #endregion
             }
@@ -265,8 +281,9 @@ namespace GCA2
                 {
                     spriteBatch.Draw(tileGrass, new Vector2(i, 480 - lineQueue[i].Height), Color.White);
                 }
-
+            
                 spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y, new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(60, 0), Color.White);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.
