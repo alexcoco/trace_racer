@@ -1,12 +1,13 @@
 Content\background.xnb
 Content\blank.xnb
 Content\gradient.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
 Content\sprites\helpImage_0.xnb
 Content\sprites\helpImage_3.xnb
 Content\sprites\helpImage_1.xnb
 Content\sprites\helpImage_2.xnb
 Content\sprites\touch.xnb
 Content\bike.xnb
-Content\tiles\tileGrass.xnb
+Content\gamefont.xnb
+Content\menufont.xnb
+Content\tiles\WorldLineTexture.xnb
+Content\tiles\WorldLineTextureBlur.xnb

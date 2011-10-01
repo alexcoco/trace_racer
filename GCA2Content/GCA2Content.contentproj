@@ -101,8 +101,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="tiles\tileGrass.png">
-      <Name>tileGrass</Name>
+    <Compile Include="tiles\WorldLineTexture.png">
+      <Name>WorldLineTexture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tiles\WorldLineTextureBlur.png">
+      <Name>WorldLineTextureBlur</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

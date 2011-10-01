@@ -88,7 +88,7 @@ namespace GCA2
 
                 gameFont = content.Load<SpriteFont>("gamefont");
                 touchTexture = content.Load<Texture2D>("sprites/touch");
-                tileGrass = content.Load<Texture2D>("tiles/tileGrass");
+                tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
 
                 world = new WorldObject(ScreenManager.Game, ScreenManager.SpriteBatch);
 
