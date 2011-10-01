@@ -11,6 +11,6 @@ namespace GCA2
 
         public const float MIN_SPEED = SPEED * 0.1f;
         public const float NORMAL_SPEED = SPEED * 0.4f;
-        public const float MAX_SPEED = SPEED * 1.0f;
+        public const float MAX_SPEED = SPEED * 0.8f;
     }
 }
