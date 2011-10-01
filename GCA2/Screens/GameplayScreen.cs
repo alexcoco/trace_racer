@@ -182,21 +182,24 @@ namespace GCA2
                     }
                     else
                     {
-                        if (!hasStarted)
-                        {
-                            world.getPlayer().setActive();
-                            //TODO draw whole bottom till 0
-                        }
-
                         foreach (TouchLocation tl in touchCollection)
                         {
-                            hasStarted = true;
+                            if (!hasStarted)
+                            {
+                                world.getPlayer().setActive();
+                                world.fillBegin((int)tl.Position.X, 480 - (int)tl.Position.Y);
+                                hasStarted = true;
+                            }
+
                             touchPosition.X = tl.Position.X;
                             touchPosition.Y = tl.Position.Y;
 
                             if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                             {
-                               // isPressed = true;
+                                if (world.getLineQueue()[(int)Math.Max(1, pressedLastX) - 1].Height == -1)
+                                {
+                                    pressedLastY = (int)touchPosition.Y;
+                                }
                                 if (touchPosition.X > pressedLastX)
                                 {
                                     for (;pressedLastX < touchPosition.X; pressedLastX++)

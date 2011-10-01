@@ -55,6 +55,14 @@ namespace GCA2
             lineQueue.Insert(pos, new WorldLine(height));
         }
 
+        public void fillBegin(int pos, int height)
+        {
+            for (int i = 0; i < pos; i++)
+            {
+                lineQueue.Insert(i, new WorldLine(height));
+            }
+        }
+
         public void removeLine(int pos)
         {
             lineQueue.RemoveAt(pos);
