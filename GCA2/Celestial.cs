@@ -10,6 +10,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
+
 namespace GCA2
 {
     /// <summary>
@@ -67,7 +68,8 @@ namespace GCA2
         private void AddInitialScreens()
         {
             // Activate the first screens.
-            screenManager.AddScreen(new BackgroundScreen(), null);
+            BackgroundScreen backgroundScreen = new BackgroundScreen();
+            screenManager.AddScreen(backgroundScreen, null);
 
             // We have different menus for Windows Phone to take advantage of the touch interface
 #if WINDOWS_PHONE

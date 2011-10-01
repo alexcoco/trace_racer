@@ -19,11 +19,10 @@ namespace GCA2
     /// <summary>
     /// Provides a basic base screen for menus on Windows Phone leveraging the Button class.
     /// </summary>
-    class PhoneMenuScreen : GameScreen
+     class PhoneMenuScreen : GameScreen
     {
         List<Button> menuButtons = new List<Button>();
-        string menuTitle;
-
+        public string menuTitle {get; set;}
         InputAction menuCancel;
 
         /// <summary>
@@ -33,6 +32,7 @@ namespace GCA2
         {
             get { return menuButtons; }
         }
+     
 
         /// <summary>
         /// Creates the PhoneMenuScreen with a particular title.
@@ -123,7 +123,6 @@ namespace GCA2
             // Draw all of the buttons
             foreach (Button b in menuButtons)
                 b.Draw(this);
-
             // Make the menu slide into place during transitions, using a
             // power curve to make things look more interesting (this makes
             // the movement slow down as it nears the end).

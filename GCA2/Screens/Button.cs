@@ -111,7 +111,6 @@ namespace GCA2
         {
             Text = text;
         }
-
         /// <summary>
         /// Invokes the Tapped event and allows subclasses to perform actions when tapped.
         /// </summary>

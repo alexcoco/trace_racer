@@ -42,6 +42,11 @@ namespace GCA2
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
 
+        public Texture2D BackgroundTexture
+        {
+            get { return backgroundTexture; }
+            set { this.backgroundTexture = value; }
+        }
 
         /// <summary>
         /// Loads graphics content for this screen. The background texture is quite
