@@ -14,6 +14,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
+
+using System.Collections.Generic;
 #endregion
 
 namespace GCA2
@@ -30,9 +33,15 @@ namespace GCA2
         ContentManager content;
         SpriteFont gameFont;
 
-        Vector2 playerPosition = new Vector2(100, 100);
-        Vector2 enemyPosition = new Vector2(100, 100);
+        Vector2 touchPosition = new Vector2(0, 0);
 
+        //textures
+        Texture2D touchTexture;
+
+        //tiles
+        Texture2D tileGrass;
+
+        List<WorldLine> lineQueue = new List<WorldLine>(800);
         Random random = new Random();
 
         float pauseAlpha;
@@ -70,6 +79,15 @@ namespace GCA2
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
 
                 gameFont = content.Load<SpriteFont>("gamefont");
+                touchTexture = content.Load<Texture2D>("sprites/touch");
+                tileGrass = content.Load<Texture2D>("tiles/tileGrass");
+
+                // create worldline queue
+                for (int i = 0; i < 800; i++)
+                {
+                    lineQueue.Add(new WorldLine());
+                }
+
 
                 // A real game would probably have more content than this sample, so
                 // it would take longer to load. We simulate that by delaying for a
@@ -85,8 +103,8 @@ namespace GCA2
 #if WINDOWS_PHONE
             if (Microsoft.Phone.Shell.PhoneApplicationService.Current.State.ContainsKey("PlayerPosition"))
             {
-                playerPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"];
-                enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
+               // playerPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"];
+               // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
 #endif
         }
@@ -95,8 +113,8 @@ namespace GCA2
         public override void Deactivate()
         {
 #if WINDOWS_PHONE
-            Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"] = playerPosition;
-            Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"] = enemyPosition;
+           // Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"] = playerPosition;
+           // Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"] = enemyPosition;
 #endif
 
             base.Deactivate();
@@ -111,8 +129,8 @@ namespace GCA2
             content.Unload();
 
 #if WINDOWS_PHONE
-            Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove("PlayerPosition");
-            Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove("EnemyPosition");
+            //Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove("PlayerPosition");
+            //Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove("EnemyPosition");
 #endif
         }
 
@@ -140,21 +158,21 @@ namespace GCA2
 
             if (IsActive)
             {
-                // Apply some random jitter to make the enemy move around.
-                const float randomization = 10;
+                #region GAME LOGIC
 
-                enemyPosition.X += (float)(random.NextDouble() - 0.5) * randomization;
-                enemyPosition.Y += (float)(random.NextDouble() - 0.5) * randomization;
+                    TouchCollection touchCollection = TouchPanel.GetState();
 
-                // Apply a stabilizing force to stop the enemy moving off the screen.
-                Vector2 targetPosition = new Vector2(
-                    ScreenManager.GraphicsDevice.Viewport.Width / 2 - gameFont.MeasureString("Insert Gameplay Here").X / 2,
-                    200);
+                    foreach (TouchLocation tl in touchCollection)
+                    {
+                        touchPosition.X = tl.Position.X;
+                        touchPosition.Y = tl.Position.Y;
+                    }
 
-                enemyPosition = Vector2.Lerp(enemyPosition, targetPosition, 0.05f);
+   
 
-                // TODO: this game isn't very fun! You could probably improve
-                // it by inserting something more interesting in this space :-)
+                    
+
+                #endregion
             }
         }
 
@@ -215,15 +233,15 @@ namespace GCA2
                 if (input.TouchState.Count > 0)
                 {
                     Vector2 touchPosition = input.TouchState[0].Position;
-                    Vector2 direction = touchPosition - playerPosition;
-                    direction.Normalize();
-                    movement += direction;
+                    //Vector2 direction = touchPosition - playerPosition;
+                    //direction.Normalize();
+                    //movement += direction;
                 }
 
                 if (movement.Length() > 1)
                     movement.Normalize();
 
-                playerPosition += movement * 8f;
+                //playerPosition += movement * 8f;
             }
         }
 
@@ -241,12 +259,14 @@ namespace GCA2
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
             spriteBatch.Begin();
+                spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
-            spriteBatch.DrawString(gameFont, "// TODO", playerPosition, Color.Green);
+                for (int i = 0; i < 800; i++)
+                {
+                    spriteBatch.Draw(tileGrass, new Vector2(i, 480 - lineQueue[i].Height), Color.White);
+                }
 
-            spriteBatch.DrawString(gameFont, "Insert Gameplay Here",
-                                   enemyPosition, Color.DarkRed);
-
+                spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.

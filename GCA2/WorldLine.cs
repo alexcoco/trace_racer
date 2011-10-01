@@ -8,7 +8,14 @@ namespace GCA2
     /// <summary>
     /// A line is the most basic component of the world.
     /// </summary>
-    class WorldLine
+    public class WorldLine
     {
+        public int Height { get; set; }
+
+        public WorldLine()
+        {
+            Height = 10;
+        }
+
     }
 }

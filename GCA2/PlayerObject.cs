@@ -63,9 +63,9 @@ namespace GCA2
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
-            if (this.isAlive)
+            if (this.IsAlive)
             {
-                mySpriteBatch.Draw(texture, position, Color.White);
+                //mySpriteBatch.Draw(texture, position, Color.White);
             }
 
             base.Draw(gameTime);

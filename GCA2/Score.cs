@@ -8,7 +8,7 @@ namespace GCA2
     /// <summary>
     /// Keeps track of the number of points that the player scored.
     /// </summary>
-    class Score
+    public class Score
     {
     }
 }
