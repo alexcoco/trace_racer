@@ -122,12 +122,12 @@ namespace GCA2
         {
             // TODO 
             //Speeding up, increase the position of the X value and Y (lower on the screen)
-            if((CurrentLine.Height - World.getLine((int)Position.X + Texture.Bounds.Width/2).Height+1) > 0)
+            if((CurrentLine.Height - World.getLine(((int)Position.X + Texture.Bounds.Width/2) +1).Height) > 0)
             {
                 Position.X++;
                 Position.Y++;
             }//If the next line is higher, raise the position of the biker
-            else if ((CurrentLine.Height - World.getLine((int)Position.X + Texture.Bounds.Width / 2).Height + 1) < 0)
+            else if (CurrentLine.Height - World.getLine(((int)Position.X + Texture.Bounds.Width / 2) + 1).Height < 0)
             {
                 Position.Y--;
                 Position.X--;
