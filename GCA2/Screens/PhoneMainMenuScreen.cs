@@ -43,7 +43,7 @@ namespace GCA2
                 if (screen.GetType() == typeof(BackgroundScreen))
                 {
                     background = (BackgroundScreen)screen;
-                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("HelpScreen");
+                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("bg/HelpScreen");
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace GCA2
                 if (screen.GetType() == typeof(BackgroundScreen))
                 {
                     background = (BackgroundScreen)screen;
-                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("CreditsScreen");
+                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("bg/CreditsScreen");
                 }
             }
         }

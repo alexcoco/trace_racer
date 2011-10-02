@@ -11,18 +11,6 @@ Content\tiles\WorldLineTexture.xnb
 Content\tiles\WorldLineTextureBlur.xnb
 Content\sprites\happycloud1.xnb
 Content\bg\background_sun.xnb
-Content\gates\gate-closed-1.xnb
-Content\gates\gate-closed-ng0.xnb
-Content\gates\gate-closed-ng1.xnb
-Content\gates\gate-closed0.xnb
-Content\gates\gate-ng0.xnb
-Content\gates\gate-ng00.xnb
-Content\gates\gate-ng1.xnb
-Content\gates\gate-ng11.xnb
-Content\gates\gate0.xnb
-Content\gates\gate00.xnb
-Content\gates\gate1.xnb
-Content\gates\gate11.xnb
 Content\clouds\clud1.xnb
 Content\clouds\clud2.xnb
 Content\clouds\clud3.xnb
@@ -31,15 +19,7 @@ Content\bg\background_gradient.xnb
 Content\bg\parallax_layer.xnb
 Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
-Content\bg\gameOver.xnb
 <<<<<<< HEAD
-Content\mainFont.xnb
-Content\sounds\DownbeatBeep.xnb
-Content\sounds\FastBeep.xnb
-Content\sounds\GameOverLoop.xnb
-Content\sounds\GamePlayHalfBit.xnb
-Content\sounds\GameStartDatahellBeta.xnb
-Content\sounds\GatePass.xnb
 Content\TitleScreen.xnb
 =======
 >>>>>>> de1344650598660c5a0f4ca79bcf52ab1e689d55
@@ -52,6 +32,25 @@ Content\gates\gatekeeper.xnb
 Content\tex\star.xnb
 <<<<<<< HEAD
 =======
+<<<<<<< Updated upstream
+Content\sounds\DownbeatBeep.xnb
+Content\sounds\FastBeep.xnb
+Content\sounds\GameOverLoop.xnb
+Content\sounds\GamePlayHalfBit.xnb
+Content\sounds\GameStartDatahellBeta.xnb
+Content\sounds\GatePass.xnb
+Content\mainFont.xnb
+=======
+Content\gates\BlueGate.xnb
+Content\gates\GrayGate.xnb
+Content\gates\GreenGate.xnb
+Content\gates\IndigoGate.xnb
+Content\gates\OrangeGate.xnb
+Content\gates\PinkGate.xnb
+Content\gates\RedGate.xnb
+Content\gates\VioletGate.xnb
+Content\gates\YellowGate.xnb
+Content\bg\HelpScreen.xnb
 Content\TitleScreen.xnb
 Content\sounds\DownbeatBeep.xnb
 Content\sounds\FastBeep.xnb

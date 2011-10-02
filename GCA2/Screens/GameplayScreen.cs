@@ -279,7 +279,7 @@ namespace GCA2
                                         // Add score * ++mutiplier
                                         world.player.Score.Points += 10000 * (++world.player.Score.Multiplier);
                                         // Set gate off
-                                        nextGate.gate = nextGate.gatePassed;
+                                        nextGate.myTexture = Gate.gatePassed;
                                         nextGate.isHit = true;
                                     }
                                 }

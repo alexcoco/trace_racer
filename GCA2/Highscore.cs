@@ -9,7 +9,7 @@ namespace GCA2
 {
     public class Highscore
     {
-        private static sealed string filename = "highscore.dat";
+        private static string filename = "highscore.dat";
 
         public static void SaveHighscore(Score score)
         {

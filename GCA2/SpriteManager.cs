@@ -62,18 +62,23 @@ namespace GCA2
             base.Update(gameTime);
         }
 
+        public void ParticleTime()
+        {
+            part.Draw(spriteBatch);
+        }
+
+
         public override void Draw(GameTime gameTime)
         {
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             spriteBatch.Begin();
-
             spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
 
             if (!world.player.gameOver)
             {
-                if (isPressed)
-                    spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
+                //if (isPressed)
+                   //spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
 
                 for (int i = 0; i < world.getLineQueue().Count; i++)
                 {
@@ -87,16 +92,16 @@ namespace GCA2
 
                 if (!(world.getGates().Count == 0) && world.getGates()[0].position.X > 800 && world.getGates()[0].position.X < 1600) 
                 {
-                    spriteBatch.Draw(gatekeeper, new Vector2(735, world.getGates()[0].position.Y), Color.White);
+                    spriteBatch.Draw(gatekeeper, new Vector2(705, world.getGates()[0].position.Y), Color.White);
                 }
 
                 for (int j = 0; j < world.getGates().Count; j++)
                 {
-                    spriteBatch.Draw(world.getGates()[j].gate, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
+                    spriteBatch.Draw(world.getGates()[j].myTexture, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
                 }
 
                 // Display score - lose one precision digit and mask the second one
-                spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(5, 0), Color.White);
+                spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(5, -10), Color.White);
             }
             else
             {
@@ -135,7 +140,6 @@ namespace GCA2
             }
 
             spriteBatch.Draw(world.player.Texture, world.player.Position, null, Color.White, rotationAngle, origin, 1f, SpriteEffects.None, 0);
-            part.Draw(spriteBatch);
         }
     }
 }

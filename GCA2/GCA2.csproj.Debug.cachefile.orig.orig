@@ -11,20 +11,6 @@ Content\tiles\WorldLineTexture.xnb
 Content\tiles\WorldLineTextureBlur.xnb
 Content\sprites\happycloud1.xnb
 Content\bg\background_sun.xnb
-Content\gates\gate-closed-1.xnb
-Content\gates\gate-closed-ng0.xnb
-Content\gates\gate-closed-ng1.xnb
-Content\gates\gate-closed0.xnb
-Content\gates\gate-ng0.xnb
-Content\gates\gate-ng00.xnb
-Content\gates\gate-ng1.xnb
-Content\gates\gate-ng11.xnb
-Content\gates\gate0.xnb
-Content\gates\gate00.xnb
-Content\gates\gate1.xnb
-Content\gates\gate11.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
 Content\clouds\clud1.xnb
 Content\clouds\clud2.xnb
 Content\clouds\clud3.xnb
@@ -33,24 +19,53 @@ Content\bg\background_gradient.xnb
 Content\bg\parallax_layer.xnb
 Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
+<<<<<<< Updated upstream
+Content\bg\gameOver.xnb
 <<<<<<< HEAD
-Content\gamefont.xnb
-Content\menufont.xnb
+Content\mainFont.xnb
+Content\TitleScreen.xnb
 =======
-Content\gameOverFont.xnb
->>>>>>> d1869e3e5b9c278b5d452a84f79c31b60bdfb014
+>>>>>>> de1344650598660c5a0f4ca79bcf52ab1e689d55
+=======
+>>>>>>> Stashed changes
+Content\sprites\tree2.xnb
+Content\sprites\tree3.xnb
+Content\sprites\tree4.xnb
+Content\bg\CreditsScreen.xnb
+Content\bg\TitleScreen.xnb
+Content\gates\gatekeeper.xnb
+Content\tex\star.xnb
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
 Content\sounds\DownbeatBeep.xnb
 Content\sounds\FastBeep.xnb
 Content\sounds\GameOverLoop.xnb
 Content\sounds\GamePlayHalfBit.xnb
 Content\sounds\GameStartDatahellBeta.xnb
 Content\sounds\GatePass.xnb
-<<<<<<< HEAD
-Content\sounds\DownbeatBeep.wma
-Content\sounds\FastBeep.wma
-Content\sounds\GameOverLoop.wma
-Content\sounds\GamePlayHalfBit.wma
-Content\sounds\GameStartDatahellBeta.wma
-Content\sounds\GatePass.wma
+Content\mainFont.xnb
 =======
->>>>>>> d1869e3e5b9c278b5d452a84f79c31b60bdfb014
+Content\gates\BlueGate.xnb
+Content\gates\GrayGate.xnb
+Content\gates\GreenGate.xnb
+Content\gates\IndigoGate.xnb
+Content\gates\OrangeGate.xnb
+Content\gates\PinkGate.xnb
+Content\gates\RedGate.xnb
+Content\gates\VioletGate.xnb
+Content\gates\YellowGate.xnb
+Content\bg\HelpScreen.xnb
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
+Content\TitleScreen.xnb
+Content\sounds\DownbeatBeep.xnb
+Content\sounds\FastBeep.xnb
+Content\sounds\GameOverLoop.xnb
+Content\sounds\GamePlayHalfBit.xnb
+Content\sounds\GameStartDatahellBeta.xnb
+Content\sounds\GatePass.xnb
+Content\mainFont.xnb
+>>>>>>> de1344650598660c5a0f4ca79bcf52ab1e689d55
