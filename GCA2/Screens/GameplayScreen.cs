@@ -320,6 +320,15 @@ namespace GCA2
                             ScreenManager.RemoveScreen(this);
                             ScreenManager.AddScreen(background, null);
                             ScreenManager.AddScreen(new PhoneMainMenuScreen(background), null);
+
+                            long highscore = Highscore.Load();
+                            long playerScore = (world.player.Score.Points / 100) * 10;
+
+                            if (highscore > playerScore)
+                            {
+                                Highscore.Save(highscore);
+                                world.player.Score.Highscore = highscore;
+                            }
                         }
                     }
                 }

@@ -13,11 +13,13 @@ namespace GCA2
     {
         public long Points { get; set; }
         public int Multiplier { get; set; }
+        public long Highscore { get; set; }
 
         public Score(Game game) : base(game)
         {
             Points = 0;
             Multiplier = 0;
+            Highscore = GCA2.Highscore.Load();
         }
     }
 }

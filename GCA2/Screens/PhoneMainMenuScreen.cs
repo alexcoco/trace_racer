@@ -23,6 +23,7 @@ namespace GCA2
     {
         BackgroundScreen background;
         int currentMenuPage = 0;
+
         public PhoneMainMenuScreen(BackgroundScreen background)
             : base("")
         {
