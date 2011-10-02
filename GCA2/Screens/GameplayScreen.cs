@@ -156,7 +156,7 @@ namespace GCA2
                 {
                     TouchLocation tl = touchCollection[0];
                     world.player.IsAlive = true;
-                    world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
+                    world.fillBegin((int)tl.Position.X+1, TouchPanel.DisplayHeight - (int)tl.Position.Y);
                     world.player.setActive();
                     hasStarted = true;
                 }
@@ -166,9 +166,6 @@ namespace GCA2
 
                     for (int i = 0; i < gameTime.ElapsedGameTime.Milliseconds; i++)
                     {
-
-                        
-
                         world.removeLine(0);
                         pressedLastX--;
 
@@ -316,16 +313,13 @@ namespace GCA2
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
-                       
+                       BackgroundScreen background = new BackgroundScreen();
                             ScreenManager.RemoveScreen(this);
-                            ScreenManager.AddScreen(new BackgroundScreen(), null);
-                            ScreenManager.AddScreen(new PhoneMainMenuScreen(), null);
+                            ScreenManager.AddScreen(background, null);
+                            ScreenManager.AddScreen(new PhoneMainMenuScreen(background), null);
                         }
                     }
                 }
-                // particles
-                part.EmitterLocation = new Vector2(world.player.Position.X - 35, world.player.Position.Y + 75);
-                part.Update();
             }
         }
 
@@ -411,7 +405,7 @@ namespace GCA2
                 {
                     float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
 #if WINDOWS_PHONE
-                    ScreenManager.AddScreen(new PhonePauseScreen(), ControllingPlayer);
+                    ScreenManager.AddScreen(new PhonePauseScreen(), null);
 #else
                 ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
 #endif

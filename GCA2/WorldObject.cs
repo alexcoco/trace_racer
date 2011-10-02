@@ -44,12 +44,12 @@ namespace GCA2
 
             int randomness = ran.Next(10, getGates().Capacity+1);
 
-            int offset = ran.Next(0, 2);
+            //int offset = ran.Next(-1, 2);
 
             for (int j = 0; j < randomness; j++)
             {
                 // TODO MAYBE CHANGE 200 TO VARYING X OVER TIME
-                gateQueue.Add(new Gate(game, spriteBatch, 200 * j, yval + (50*offset)));
+                gateQueue.Add(new Gate(game, spriteBatch, 400 * j, 200 + (int)(ran.NextDouble() * 100)));
             }
         }
 
@@ -128,6 +128,7 @@ namespace GCA2
         /// </summary>
         public void addLine(int pos, int height)
         {
+            if (pos >= 0)
             lineQueue.Insert(pos, new WorldLine(height));
         }
 

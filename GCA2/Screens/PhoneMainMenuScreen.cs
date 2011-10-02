@@ -23,53 +23,45 @@ namespace GCA2
     {
         BackgroundScreen background;
         int currentMenuPage = 0;
-        public PhoneMainMenuScreen()
+        public PhoneMainMenuScreen(BackgroundScreen background)
             : base("")
         {
-            
+            this.background = background;
         }
 
 
-        void play()
+        private void play()
         {
             // When the "Play" button is tapped, we load the GameplayScreen
             LoadingScreen.Load(ScreenManager, true, PlayerIndex.One, new GameplayScreen());
         }
 
-        void help()
+        private void help(GameTime gameTime)
         {
-            foreach (GameScreen screen in ScreenManager.GetScreens())
-            {
-                if (screen.GetType() == typeof(BackgroundScreen))
-                {
-                    background = (BackgroundScreen)screen;
-                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("bg/HelpScreen");
-                }
-            }
+            background.position = 1;
+            background.Draw(gameTime);
+             
         }
-        void credits()
+        private void credits(GameTime gameTime)
         {
 
-            foreach (GameScreen screen in ScreenManager.GetScreens())
-            {
-                if (screen.GetType() == typeof(BackgroundScreen))
-                {
-                    background = (BackgroundScreen)screen;
-                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("bg/CreditsScreen");
-                }
-            }
+            background.position = 2;
+            background.Draw(gameTime);
         }
 
-        private void backToMenu()
+        private void backToMenu(GameTime gameTime)
         {
-            MenuButtons.Clear();
-            ScreenManager.RemoveScreen(background);
-            ScreenManager.RemoveScreen(this);
-            ScreenManager.AddScreen(new BackgroundScreen(), null);
-            ScreenManager.AddScreen(this, null);
-            this.Activate(true);
+            background.position = 0;
+            background.Draw(gameTime);
         }
 
+        public override void Draw(GameTime gameTime)
+        {
+            
+            base.Draw(gameTime);
+
+            background.Draw(gameTime);
+        }
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
@@ -77,6 +69,7 @@ namespace GCA2
             foreach (TouchLocation tl in touchCollection)
             {
                 Vector2 touchposition = tl.Position;
+
                 if (currentMenuPage == 0)
                 {
                     if ((touchposition.X >= 0 && touchposition.X <= 200) && (touchposition.Y >= 420 && touchposition.Y <= 480))
@@ -85,12 +78,12 @@ namespace GCA2
                     }
                     else if ((touchposition.X >= 600 && touchposition.X <= 800) && (touchposition.Y >= 420 && touchposition.Y <= 480))
                     {
-                        help();
+                        help(gameTime);
                         currentMenuPage = 1;
                     }
-                    else if ((touchposition.X >= 675 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
-                        credits();
+                        credits(gameTime);
                         currentMenuPage = 2;
                     }
                 }
@@ -98,7 +91,7 @@ namespace GCA2
                 {
                     if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
-                        backToMenu();
+                        backToMenu(gameTime);
                         currentMenuPage = 0;
                     }
 
@@ -107,7 +100,7 @@ namespace GCA2
                 {
                     if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
-                        backToMenu();
+                        backToMenu(gameTime);
                         currentMenuPage = 0;
                     }
                 }
