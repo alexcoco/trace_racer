@@ -164,18 +164,22 @@ namespace GCA2
             {
                 if (layer.isSeamless)
                 {
-                    layer.position.X += layer.scrollSpeed * timeDelta;
-                    layer.position.X = layer.position.X % layer.layerTexture.Width;
+                    layer.position.X -= layer.scrollSpeed * timeDelta;
+
+                    if ((int)layer.position.X + layer.layerTexture.Width == Microsoft.Xna.Framework.Input.Touch.TouchPanel.DisplayWidth) {
+                        layer.position.X = 0;
+                    }
+                    //layer.position.X = layer.position.X % layer.layerTexture.Width;
                 }
                 else
                 {
-                    if (layer.position.X >= Game.GraphicsDevice.Viewport.Width)
+                    if (layer.position.X > Game.GraphicsDevice.Viewport.Width)
                     {
-                        layer.position.X = -layer.layerTexture.Width;
+                        layer.position.X = layer.layerTexture.Width;
                     }
                     else
                     {
-                        layer.position.X += layer.scrollSpeed * timeDelta;
+                        layer.position.X -= layer.scrollSpeed * timeDelta;
                     }
                 }
             }
