@@ -69,6 +69,7 @@ namespace GCA2
             foreach (TouchLocation tl in touchCollection)
             {
                 Vector2 touchposition = tl.Position;
+
                 if (currentMenuPage == 0)
                 {
                     if ((touchposition.X >= 0 && touchposition.X <= 200) && (touchposition.Y >= 420 && touchposition.Y <= 480))
@@ -80,7 +81,7 @@ namespace GCA2
                         help(gameTime);
                         currentMenuPage = 1;
                     }
-                    else if ((touchposition.X >= 675 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
                         credits(gameTime);
                         currentMenuPage = 2;

@@ -123,6 +123,14 @@ namespace GCA2
                 for (int j = 0; j < world.getGates().Count; j++)
                 {
                     spriteBatch.Draw(world.getGates()[j].myTexture, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
+                    // particles
+                    if (world.getGates()[j].isHit)
+                    {
+                        part.EmitterLocation = new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y);
+                        part.Update();
+
+                        part.Draw(spriteBatch);
+                    }
                 }
 
                 // Display score - lose one precision digit and mask the second one
