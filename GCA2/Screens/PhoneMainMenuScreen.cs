@@ -88,7 +88,7 @@ namespace GCA2
                         help();
                         currentMenuPage = 1;
                     }
-                    else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    else if ((touchposition.X >= 675 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
                         credits();
                         currentMenuPage = 2;

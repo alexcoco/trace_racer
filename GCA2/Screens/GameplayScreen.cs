@@ -306,11 +306,7 @@ namespace GCA2
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
-                            //ScreenManager.Game.Components.Remove(spriteManager);
-                            //ScreenManager.Game.Components.Remove(parallaxManager);
-                            //LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMenuScreen("Title"));
-                            //System.Diagnostics.Debug.WriteLine("SdfdsF");
-                            //LoadingScreen.Load(ScreenManager, true, PlayerIndex.One, new GameplayScreen());
+                       
                         }
                     }
                 }
