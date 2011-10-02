@@ -122,7 +122,7 @@ namespace GCA2
 
                     while (diff2 > 0)
                     {
-                       Position.Y -= 1;
+                        Position.Y -= 1;
                         diff2 = World.getPositionDifference();
                     }
                 }
@@ -131,7 +131,7 @@ namespace GCA2
                     // Collision
                     airtime = 0;
 
-                    if (difference > TouchPanel.DisplayHeight*0.1)
+                    if (difference > TouchPanel.DisplayHeight * 0.1)
                     {
                         IsAlive = false;
                         gameOver = true;
@@ -174,13 +174,16 @@ namespace GCA2
             else
             {
                 // flat - bring to normal speed
-                if(Position.X > Constants.NORMAL_SPEED){
+                if (Position.X > Constants.NORMAL_SPEED)
+                {
                     Position.X--;
-                }else if (Position.X < Constants.NORMAL_SPEED) {
+                }
+                else if (Position.X < Constants.NORMAL_SPEED)
+                {
                     Position.X++;
                 }
             }
-            
+
             //if (difference == 0 || difference < 0)
             //{
             //    //// flat || in air

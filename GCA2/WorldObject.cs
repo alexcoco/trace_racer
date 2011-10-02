@@ -22,7 +22,8 @@ namespace GCA2
 
         public PlayerObject player;
 
-        public WorldObject(Game g, SpriteBatch sb) : base(g)
+        public WorldObject(Game g, SpriteBatch sb)
+            : base(g)
         {
             game = g;
             spriteBatch = sb;
@@ -35,11 +36,12 @@ namespace GCA2
             return gateQueue;
         }
 
-        public void createGates() {
+        public void createGates()
+        {
             gateQueue.Clear();
             for (int j = 0; j < getGates().Capacity; j++)
             {
-                gateQueue.Add(new Gate(game, spriteBatch, 200*j));
+                gateQueue.Add(new Gate(game, spriteBatch, 200 * j));
             }
         }
 

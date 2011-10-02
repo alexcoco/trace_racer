@@ -32,27 +32,17 @@ namespace GCA2
 
         ContentManager content;
         Vector2 touchPosition = new Vector2(0, 0);
-
-        // parallax mngr
         ParallaxManager parallaxManager;
-
         SpriteManager spriteManager;
-
         WorldObject world;
-
         Boolean hasStarted = false;
-
         Boolean isPressed = false;
         int pressedLastX = 0;
         int pressedLastY = 0;
-
         Random random = new Random();
-
         float pauseAlpha;
-
         InputAction pauseAction;
         int newLineY;
-
         SoundPlayer player;
 
         #endregion
@@ -188,7 +178,7 @@ namespace GCA2
 
             if (IsActive)
             {
-                if (world.player.IsAlive && !world.player.gameOver)
+                if (world.player.IsAlive & !world.player.gameOver)
                 {
                     #region GAME LOGIC
 
@@ -320,13 +310,12 @@ namespace GCA2
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
-                            Unload();
-                            LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
+                            //LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
                         }
+                        break;
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -406,7 +395,7 @@ namespace GCA2
             if (world.player.gameOver)
             {
                 // If the game is transitioning on or off, fade it out to black.
-                if (TransitionPosition > 0 || pauseAlpha > 0) 
+                if (TransitionPosition > 0 || pauseAlpha > 0)
                 {
                     float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
 

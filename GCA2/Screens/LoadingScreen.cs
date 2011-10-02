@@ -11,6 +11,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 #endregion
 
 namespace GCA2
@@ -37,6 +38,8 @@ namespace GCA2
         bool otherScreensAreGone;
 
         GameScreen[] screensToLoad;
+
+        ContentManager content;
 
         #endregion
 
@@ -137,9 +140,14 @@ namespace GCA2
             if (loadingIsSlow)
             {
                 SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
-                SpriteFont font = ScreenManager.Font;
+                //SpriteFont font = ScreenManager.Font;
 
-                const string message = "Loading...";
+                if (content == null)
+                    content = new ContentManager(ScreenManager.Game.Services, "Content");
+
+                SpriteFont font = content.Load<SpriteFont>("mainFont");
+
+                const string message = "LOADING!";
 
                 // Center the text in the viewport.
                 Viewport viewport = ScreenManager.GraphicsDevice.Viewport;

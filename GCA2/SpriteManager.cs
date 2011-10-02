@@ -19,21 +19,11 @@ namespace GCA2
         ContentManager content;
 
         Vector2 touchPosition = new Vector2(0, 0);
-
-        //textures
         Texture2D touchTexture;
-
-        //sprites
-        Texture2D happyCloud1;
-
-        //tiles
         Texture2D tileGrass;
-
-        Texture2D gate0;
-
-        SpriteFont gameFont;
+        Texture2D gameOverlay;
+        SpriteFont mainFont;
         WorldObject world;
-        SpriteFont gameOverFont;
         Boolean isPressed = false;
 
         public SpriteManager(Game game, Vector2 touchPosition, Boolean isPressed, WorldObject world)
@@ -44,76 +34,54 @@ namespace GCA2
             this.world = world;
 
             this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            
+
             if (content == null)
                 content = new ContentManager(Game.Services, "Content");
 
-            gameFont = content.Load<SpriteFont>("gamefont");
-            gameOverFont = content.Load<SpriteFont>("gameOverFont");
+            mainFont = content.Load<SpriteFont>("mainFont");
             touchTexture = content.Load<Texture2D>("sprites/touch");
             tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
-            happyCloud1 = content.Load<Texture2D>("sprites/happyCloud1");
-            gate0 = content.Load<Texture2D>("gates/gate0");
+            gameOverlay = content.Load<Texture2D>("bg/gameOver");
         }
 
         public override void Update(GameTime gameTime)
         {
-
             base.Update(gameTime);
         }
 
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Our player and enemy are both actually just text strings.
-            //SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
-
             spriteBatch.Begin();
-            //spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
-            //spriteBatch.Draw(happyCloud1, new Vector2(10, 10), new Rectangle(-1, 0, happyCloud1.Width, happyCloud1.Height), Color.White);
 
-
-            if (isPressed)
-                spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
-
-            for (int i = 0; i < world.getLineQueue().Count; i++)
+            if (!world.player.gameOver)
             {
-                spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
+                if (isPressed)
+                    spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
+
+                for (int i = 0; i < world.getLineQueue().Count; i++)
+                {
+                    spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
+                }
+
+                if (world.player.IsAlive)
+                {
+                    drawPlayer(world);
+                }
+
+                for (int j = 0; j < world.getGates().Count; j++)
+                {
+                    spriteBatch.Draw(world.getGates()[j].gate, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
+                }
+
+                // Display score - lose one precision digit and mask the second one
+                spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(15, 10), Color.White);
             }
-
-            if (world.player.IsAlive)
+            else
             {
-                drawPlayer(world);
-            }
-
-            //spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
-            //spriteBatch.DrawString(gameFont,
-            ////     "Tx: " + touchPosition.X
-            //   + "\nTy: " + touchPosition.Y
-            //   + "\nNy: " + newLineY
-            //   + "\nPx: " + pressedLastX
-            //   + "\nPy: " + pressedLastY,
-            //   new Vector2(0, 0), Color.White);
-            //spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
-
-            // Display score - lose one precision digit and mask the second one
-            spriteBatch.DrawString(gameFont, "POINTS " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(15, 10), Color.White);
-
-            for (int j = 0; j < world.getGates().Count; j++)
-            {
-                spriteBatch.Draw(world.getGates()[j].gate, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
-            }
-
-            if (world.player.gameOver)
-            {
-               
-                spriteBatch.DrawString(gameOverFont, "GAME OVER",  new Vector2((int)((TouchPanel.DisplayHeight / 2) - gameOverFont.Spacing), (TouchPanel.DisplayWidth / 2)), Color.White);
+                spriteBatch.Draw(gameOverlay, new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(mainFont, "SCORE: " + world.player.Score.Points, new Vector2(200 - mainFont.Spacing, 60), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);
