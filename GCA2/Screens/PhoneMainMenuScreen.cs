@@ -21,10 +21,10 @@ namespace GCA2
 {
     class PhoneMainMenuScreen : PhoneMenuScreen
     {
-        int currentHelpImage = 0;
         BackgroundScreen background;
+        int currentMenuPage = 0;
         public PhoneMainMenuScreen()
-            : base("Main Menu")
+            : base("")
         {
 
         }
@@ -37,80 +37,44 @@ namespace GCA2
         }
       
         void help()
-        {
-            MenuButtons.Clear();
-            this.menuTitle = "Help";
-            setUpHelpButtons();
+        {    
             foreach (GameScreen screen in ScreenManager.GetScreens())
             {
                 if (screen.GetType() == typeof(BackgroundScreen))
                 {
                     background = (BackgroundScreen)screen;
-                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("sprites/helpImage_" + 0);
+                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("HelpScreen");
                 }
             }   
         }
-        private void setUpHelpButtons()
+        void credits()
         {
-            Button menuButton = new Button("Menu");
-            menuButton.Tapped += menuButton_Tapped;
-            menuButton.Position.X = (TouchPanel.DisplayWidth / 2) - menuButton.Size.X / 2;
-            menuButton.Position.Y = TouchPanel.DisplayHeight - 100;
-            MenuButtons.Add(menuButton);
 
-            Button prevButton = new Button("Prev");
-            prevButton.Tapped += prevButton_Tapped;
-            prevButton.Position.X = 0;
-            prevButton.Position.Y = TouchPanel.DisplayHeight - 100;
-            MenuButtons.Add(prevButton);
- 
-            Button nextButton = new Button("Next");
-            nextButton.Tapped += nextButton_Tapped;
-            nextButton.Position.X = TouchPanel.DisplayWidth - menuButton.Size.X;
-            nextButton.Position.Y = TouchPanel.DisplayHeight - 100;
-            MenuButtons.Add(nextButton);
-        }
-
-        void nextButton_Tapped(object sender, EventArgs e)
-        {
-            if (currentHelpImage < 3)
+            foreach (GameScreen screen in ScreenManager.GetScreens())
             {
-                currentHelpImage++;
-                foreach (GameScreen screen in ScreenManager.GetScreens())
+                if (screen.GetType() == typeof(BackgroundScreen))
                 {
-                    if (screen.GetType() == typeof(BackgroundScreen))
-                    {
-                         background = (BackgroundScreen)screen;
-                        background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("sprites/helpImage_" + currentHelpImage);
-                    }
+                    background = (BackgroundScreen)screen;
+                    background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("CreditsScreen");
                 }
-            }
+            }   
         }
-        void prevButton_Tapped(object sender, EventArgs e)
-        {
-            if (currentHelpImage != 0)
-            {
-                currentHelpImage--;
-                foreach (GameScreen screen in ScreenManager.GetScreens())
-                {
-                    if (screen.GetType() == typeof(BackgroundScreen))
-                    {
-                        background = (BackgroundScreen)screen;
-                        background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("sprites/helpImage_" + currentHelpImage);
-                    }
-                }   
-            }
-        }
+
+       
         void menuButton_Tapped(object sender, EventArgs e)
+        {
+            backToMenu();
+
+        }
+
+        private void backToMenu()
         {
             MenuButtons.Clear();
             ScreenManager.RemoveScreen(background);
             ScreenManager.RemoveScreen(this);
             ScreenManager.AddScreen(new BackgroundScreen(), null);
             ScreenManager.AddScreen(this, null);
-            this.menuTitle = "Main Menu";
             this.Activate(true);
-
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
@@ -120,13 +84,38 @@ namespace GCA2
             foreach (TouchLocation tl in touchCollection)
             {
                 Vector2 touchposition = tl.Position;
-                if ((touchposition.X >= 0 && touchposition.X <= 200)&& (touchposition.Y >= 420 && touchposition.Y <= 480))
+                if (currentMenuPage == 0)
                 {
-                    play();
-                }
-                if ((touchposition.X >= 600 && touchposition.X <= 800) && (touchposition.Y >= 420 && touchposition.Y <= 480))
+                    if ((touchposition.X >= 0 && touchposition.X <= 200) && (touchposition.Y >= 420 && touchposition.Y <= 480))
+                    {
+                        play();
+                    }else if ((touchposition.X >= 600 && touchposition.X <= 800) && (touchposition.Y >= 420 && touchposition.Y <= 480))
+                    {
+                        help();
+                        currentMenuPage = 1;
+                        break;
+                    }else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    {
+                        //TODO toggle to credits page
+                        currentMenuPage = 2;
+                        break;
+                    }
+                } else if (currentMenuPage ==1)
                 {
-                    help();
+                    if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    {
+                        //TODO toggle to credits page
+                        backToMenu();
+                        currentMenuPage = 0;
+                    }
+                    
+                } else if (currentMenuPage == 2)
+                {
+                    if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    {
+                        backToMenu();
+                        currentMenuPage = 0;
+                    }
                 }
             }
         }
