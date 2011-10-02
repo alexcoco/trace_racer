@@ -88,7 +88,7 @@ namespace GCA2
 
             if (world.player.IsAlive)
             {
-                spriteBatch.Draw(world.player.Texture, world.player.Position, Color.White);
+                drawPlayer(world);
             }
 
             //spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
@@ -102,6 +102,36 @@ namespace GCA2
             spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void drawPlayer(WorldObject world)
+        {
+            float rotationAngle;
+            Vector2 origin;
+
+            //spriteBatch.Draw(Texture, Position, Color.White);
+
+            int difference = world.getPositionDifference();
+            if (difference > 0)
+            {
+                // decel - bring to min
+                rotationAngle = Constants.ROTATION_ANGLE_DOWN;
+                origin = new Vector2(0, 0);
+            }
+            else if (world.player.airtime > 14)
+            {
+                // accel - bring to max
+                rotationAngle = Constants.ROTATION_ANGLE_UP;
+                origin = new Vector2(100, 10);
+            }
+            else
+            {
+                // flat - bring to normal speed
+                rotationAngle = Constants.ROTATION_ANGLE_NORMAL;
+                origin = new Vector2(40, -10);
+            }
+
+            spriteBatch.Draw(world.player.Texture, world.player.Position, null, Color.White, rotationAngle, origin, 1f, SpriteEffects.None, 0);
         }
     }
 }
