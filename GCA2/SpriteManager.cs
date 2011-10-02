@@ -135,12 +135,15 @@ namespace GCA2
 
                 // Display score - lose one precision digit and mask the second one
                 spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(5, -10), Color.White);
+                //spriteBatch.DrawString(mainFont, "HIGHSCORE: " + world.player.Score.Highscore, new Vector2(200 - mainFont.Spacing, 280), Color.White);
             }
             else
             {
                 spriteBatch.Draw(gameOverlay, new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(mainFont, "SCORE: " + world.player.Score.Points, new Vector2(200 - mainFont.Spacing, 260), Color.White);
+                spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(200 - mainFont.Spacing, 260), Color.White);
+                spriteBatch.DrawString(mainFont, "HIGHSCORE: " + world.player.Score.Highscore, new Vector2(200 - mainFont.Spacing, 300), Color.White);
             }
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
