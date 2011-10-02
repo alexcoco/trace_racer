@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">Windows Phone</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GCA2</RootNamespace>
-    <AssemblyName>GCA2</AssemblyName>
+    <RootNamespace>TraceRacer</RootNamespace>
+    <AssemblyName>TraceRacer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
@@ -22,7 +22,7 @@
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <XnaWindowsPhoneManifestTemplate>Properties\WMAppManifest.xml</XnaWindowsPhoneManifestTemplate>
     <TileImage>Background.png</TileImage>
-    <TileTitle>GCA2</TileTitle>
+    <TileTitle>Trace Racer</TileTitle>
     <SupportedCultures>
     </SupportedCultures>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -109,9 +109,9 @@
       <Project>{D613ECAD-5F4D-44E6-8FB7-7ECAFF3D02D5}</Project>
       <Name>GameStateManagement %28Windows Phone%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GCA2Content\GCA2Content.contentproj">
+    <ProjectReference Include="..\GCA2Content\TraceRacerContent.contentproj">
       <Project>{8AAFC098-E9CD-42EA-8240-E4C99270EC63}</Project>
-      <Name>GCA2Content2 %28Content%29</Name>
+      <Name>TraceRacerContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>

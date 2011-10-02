@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GCA2
+namespace TraceRacer
 {
     public class ParticleEngine
     {

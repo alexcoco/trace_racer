@@ -12,7 +12,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// Enum describes the screen transition state.

@@ -11,7 +11,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// A special button that handles toggling between "On" and "Off"

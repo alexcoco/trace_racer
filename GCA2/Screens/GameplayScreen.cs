@@ -19,7 +19,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using System.Collections.Generic;
 #endregion
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// This screen implements the actual game logic. It is just a
@@ -311,6 +311,7 @@ namespace GCA2
                 else
                 {
                     //gameover
+
                     //TouchCollection touchCollection = TouchPanel.GetState();
                     foreach (TouchLocation tl in touchCollection)
                     {
@@ -321,14 +322,14 @@ namespace GCA2
                             ScreenManager.AddScreen(background, null);
                             ScreenManager.AddScreen(new PhoneMainMenuScreen(background), null);
 
-                            long highscore = Highscore.Load();
+                            //long highscore = Highscore.Load();
                             long playerScore = (world.player.Score.Points / 100) * 10;
 
-                            if (highscore > playerScore)
-                            {
-                                Highscore.Save(highscore);
-                                world.player.Score.Highscore = highscore;
-                            }
+                            //if (highscore > playerScore)
+                            //{
+                                //Highscore.Save(highscore);
+                                //world.player.Score.Highscore = highscore;
+                            //}
                         }
                     }
                 }

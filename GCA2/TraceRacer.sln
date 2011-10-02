@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCA2", "GCA2.csproj", "{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceRacer", "TraceRacer.csproj", "{2E6D6318-6B3D-4324-96A6-A96F2D24B4AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCA2Content", "..\GCA2Content\GCA2Content.contentproj", "{8AAFC098-E9CD-42EA-8240-E4C99270EC63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceRacerContent", "..\GCA2Content\TraceRacerContent.contentproj", "{8AAFC098-E9CD-42EA-8240-E4C99270EC63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStateManagement (Windows Phone)", "..\GameStateManagement\GameStateManagement (Windows Phone).csproj", "{D613ECAD-5F4D-44E6-8FB7-7ECAFF3D02D5}"
 EndProject

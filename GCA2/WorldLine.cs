@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// A line is the most basic component of the world.

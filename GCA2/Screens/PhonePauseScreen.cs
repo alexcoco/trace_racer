@@ -9,7 +9,7 @@
 
 using System;
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// A basic pause screen for Windows Phone

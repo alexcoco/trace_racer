@@ -9,7 +9,7 @@
 
 using System;
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// Our game's implementation of IScreenFactory which can handle creating the screens

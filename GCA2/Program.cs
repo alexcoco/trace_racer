@@ -1,6 +1,6 @@
 using System;
 
-namespace GCA2
+namespace TraceRacer
 {
 #if WINDOWS || XBOX
     static class Program

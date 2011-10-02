@@ -17,7 +17,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace GCA2
+namespace TraceRacer
 {
     class PhoneMainMenuScreen : PhoneMenuScreen
     {

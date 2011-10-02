@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace GCA2
+namespace TraceRacer
 {
     class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
@@ -142,9 +142,8 @@ namespace GCA2
             {
                 spriteBatch.Draw(gameOverlay, new Vector2(0, 0), Color.White);
                 spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(200 - mainFont.Spacing, 260), Color.White);
-                spriteBatch.DrawString(mainFont, "HIGHSCORE: " + world.player.Score.Highscore, new Vector2(200 - mainFont.Spacing, 300), Color.White);
+                //spriteBatch.DrawString(mainFont, "HIGHSCORE: " + world.player.Score.Highscore, new Vector2(200 - mainFont.Spacing, 300), Color.White);
             }
-
             spriteBatch.End();
             base.Draw(gameTime);
         }

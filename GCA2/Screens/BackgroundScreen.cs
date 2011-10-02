@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 #endregion
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// The background screen sits behind all the other menu screens.
@@ -108,11 +108,8 @@ namespace GCA2
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
             // crash bug =(
-            if (!spriteBatch.IsDisposed)
-            {
-                spriteBatch.End();
+            spriteBatch.End();
 
-            }
             base.Draw(gameTime);
         }
 
