@@ -63,15 +63,15 @@ namespace GCA2
 
         public override void Update(GameTime gameTime)
         {
-            if (parallaxPosition.X > -800f)
-            {
-                parallaxPosition -= parallaxSpeed;
-            }
-            else
-            {
-                // Reset the position
-                parallaxPosition.X = 0;
-            }
+            //if (parallaxPosition.X > -800f)
+            //{
+            //    parallaxPosition -= parallaxSpeed;
+            //}
+            //else
+            //{
+            //    // Reset the position
+            //    parallaxPosition.X = 0;
+            //}
 
             base.Update(gameTime);
         }
@@ -88,6 +88,16 @@ namespace GCA2
 
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+
+            if (parallaxPosition.X > -800f)
+            {
+                parallaxPosition -= parallaxSpeed;
+            }
+            else
+            {
+                // Reset the position
+                parallaxPosition.X = 0;
+            }
             spriteBatch.Draw(parallax, parallaxPosition, Color.White);
 
             if (!world.player.gameOver)
