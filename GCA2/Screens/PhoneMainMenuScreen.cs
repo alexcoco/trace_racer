@@ -57,10 +57,10 @@ namespace GCA2
 
         public override void Draw(GameTime gameTime)
         {
-            
-            base.Draw(gameTime);
 
             background.Draw(gameTime);
+            base.Draw(gameTime);
+
         }
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
@@ -81,7 +81,7 @@ namespace GCA2
                         help(gameTime);
                         currentMenuPage = 1;
                     }
-                    else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    else if ((touchposition.X >= 675 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 100))
                     {
                         credits(gameTime);
                         currentMenuPage = 2;
@@ -89,7 +89,7 @@ namespace GCA2
                 }
                 else if (currentMenuPage == 1)
                 {
-                    if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 100))
                     {
                         backToMenu(gameTime);
                         currentMenuPage = 0;
@@ -98,7 +98,7 @@ namespace GCA2
                 }
                 else if (currentMenuPage == 2)
                 {
-                    if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 100))
                     {
                         backToMenu(gameTime);
                         currentMenuPage = 0;

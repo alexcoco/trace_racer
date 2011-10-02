@@ -19,7 +19,7 @@ namespace GCA2
         SpriteBatch spriteBatch;
 
         List<WorldLine> lineQueue = new List<WorldLine>(800);
-        List<Gate> gateQueue = new List<Gate>(50);
+        List<Gate> gateQueue = new List<Gate>(14);
 
         public PlayerObject player;
 
@@ -49,7 +49,7 @@ namespace GCA2
             for (int j = 0; j < randomness; j++)
             {
                 // TODO MAYBE CHANGE 200 TO VARYING X OVER TIME
-                gateQueue.Add(new Gate(game, spriteBatch, 400 * j, 200 + (int)(ran.NextDouble() * 100)));
+                gateQueue.Add(new Gate(game, spriteBatch, 300 * j, 200 + (int)(ran.NextDouble() * 150)));
             }
         }
 
@@ -81,8 +81,8 @@ namespace GCA2
             {
                 gX = gate.position.X;
                 gX2 = gX + gate.myTexture.Width;
-                gY = gate.position.Y +10;
-                gY2 = gY + gate.myTexture.Height -25;
+                gY = gate.position.Y +20;
+                gY2 = gY + gate.myTexture.Height -35;
 
                 if (!gate.isHit && 
                     ((gX <= pX) && (pX <= gX2) ||
