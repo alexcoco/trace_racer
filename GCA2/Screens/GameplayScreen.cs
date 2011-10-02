@@ -34,7 +34,6 @@ namespace GCA2
         Vector2 touchPosition = new Vector2(0, 0);
 
         // parallax mngr
-        ParallaxManager parallaxManager;
         SpriteManager spriteManager;
         WorldObject world;
         Boolean hasStarted = false;
@@ -45,7 +44,6 @@ namespace GCA2
         float pauseAlpha;
         InputAction pauseAction;
         int newLineY;
-        SoundPlayer player;
 
         #endregion
 
@@ -85,9 +83,6 @@ namespace GCA2
                     world.addLine(-1);
                 }
 
-                // initiliaze parallax vars
-                InitParallex();
-
                 // A real game would probably have more content than this sample, so
                 // it would take longer to load. We simulate that by delaying for a
                 // while, giving you a chance to admire the beautiful loading screen.
@@ -106,30 +101,6 @@ namespace GCA2
                 // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
 #endif
-
-            player = new SoundPlayer(ScreenManager.Game);
-            player.PlayGameMusic();
-        }
-
-        private void InitParallex()
-        {
-            spriteManager = new SpriteManager(ScreenManager.Game, touchPosition, isPressed, world);
-
-            parallaxManager = new ParallaxManager(ScreenManager.Game);
-            parallaxManager.DrawOrder = 0;
-
-            Texture2D layerTexture = content.Load<Texture2D>("bg/parallax_layer");
-            Rectangle rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 600.0f, true, layerTexture, new Vector2(layerTexture.Width, 10), rect);
-
-
-
-            layerTexture = content.Load<Texture2D>("bg/background_gradient");
-            rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 0.0f, true, layerTexture, new Vector2(layerTexture.Width, 0), rect);
-
-            ScreenManager.Game.Components.Add(parallaxManager);
-            ScreenManager.Game.Components.Add(spriteManager);
         }
 
         public override void Deactivate()
