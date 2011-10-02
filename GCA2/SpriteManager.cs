@@ -101,7 +101,7 @@ namespace GCA2
             else
             {
                 spriteBatch.Draw(gameOverlay, new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(mainFont, "SCORE: " + world.player.Score.Points, new Vector2(200 - mainFont.Spacing, 200), Color.White);
+                spriteBatch.DrawString(mainFont, "SCORE: " + world.player.Score.Points, new Vector2(200 - mainFont.Spacing, 240), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);
