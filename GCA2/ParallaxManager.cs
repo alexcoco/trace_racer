@@ -166,7 +166,7 @@ namespace GCA2
                 {
                     layer.position.X -= layer.scrollSpeed * timeDelta;
 
-                    if ((int)layer.position.X + layer.layerTexture.Width == Microsoft.Xna.Framework.Input.Touch.TouchPanel.DisplayWidth) {
+                    if ((int)layer.position.X + layer.layerTexture.Width <= Microsoft.Xna.Framework.Input.Touch.TouchPanel.DisplayWidth) {
                         layer.position.X = 0;
                     }
                     //layer.position.X = layer.position.X % layer.layerTexture.Width;

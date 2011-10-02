@@ -31,7 +31,6 @@ namespace GCA2
         #region Fields
 
         ContentManager content;
-        SpriteFont gameFont;
         Vector2 touchPosition = new Vector2(0, 0);
 
         // parallax mngr
@@ -85,7 +84,7 @@ namespace GCA2
             {
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
-                gameFont = content.Load<SpriteFont>("gamefont");
+                //gameFont = content.Load<SpriteFont>("gamefont");
                 world = new WorldObject(ScreenManager.Game, ScreenManager.SpriteBatch);
 
                 // create worldline queue
@@ -127,26 +126,11 @@ namespace GCA2
             parallaxManager = new ParallaxManager(ScreenManager.Game);
             parallaxManager.DrawOrder = 0;
 
-            // repeating clouds
             Texture2D layerTexture = content.Load<Texture2D>("bg/parallax_layer");
             Rectangle rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 150.0f, true, layerTexture, new Vector2(layerTexture.Width, 10), rect);
+            parallaxManager.AddLayer(0, 600.0f, true, layerTexture, new Vector2(layerTexture.Width, 10), rect);
 
-            //layerTexture = content.Load<Texture2D>("clouds/clud1");
-            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            //parallaxManager.AddLayer(0, 90.0f, true, layerTexture, new Vector2(layerTexture.Width, 10), rect);
 
-            //layerTexture = content.Load<Texture2D>("clouds/clud2");
-            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            //parallaxManager.AddLayer(0, 100.0f, true, layerTexture, new Vector2(layerTexture.Width, 15), rect);
-
-            //layerTexture = content.Load<Texture2D>("clouds/clud3");
-            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            //parallaxManager.AddLayer(0, 100.0f, true, layerTexture, new Vector2(layerTexture.Width, 15), rect);
-
-            //layerTexture = content.Load<Texture2D>("clouds/clud4");
-            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            //parallaxManager.AddLayer(0, 100.0f, true, layerTexture, new Vector2(layerTexture.Width, 15), rect);
 
             layerTexture = content.Load<Texture2D>("bg/background_gradient");
             rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
@@ -204,7 +188,7 @@ namespace GCA2
 
             if (IsActive)
             {
-                if (world.player.IsAlive)
+                if (world.player.IsAlive && !world.player.gameOver)
                 {
                     #region GAME LOGIC
 
@@ -214,6 +198,15 @@ namespace GCA2
 
                         world.removeLine(0);
                         pressedLastX--;
+
+                        // create gates
+                        if (world.player.Score.Points > 0 & world.player.Score.Points % 10000 == 0)
+                        {
+                            world.createGates();
+                        }
+
+                        //update gates
+                        world.updateGates();
 
                         if (touchCollection.Count == 0)
                         {
@@ -319,22 +312,22 @@ namespace GCA2
                     }
                     #endregion
                 }
-            }
-            else
-            {
-                //gameover
-                TouchCollection touchCollection = TouchPanel.GetState();
-                foreach (TouchLocation tl in touchCollection)
+                else
                 {
-                    if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                    //gameover
+                    TouchCollection touchCollection = TouchPanel.GetState();
+                    foreach (TouchLocation tl in touchCollection)
                     {
-                        Unload();
-                        LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
+                        if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                        {
+                            Unload();
+                            LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
+                        }
                     }
                 }
             }
-        }
 
+        }
 
         /// <summary>
         /// Lets the game respond to player input. Unlike the Update method,
@@ -410,12 +403,8 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            if (!world.player.IsAlive)
+            if (world.player.gameOver)
             {
-                SpriteBatch batch = new SpriteBatch(spriteManager.GraphicsDevice);
-                batch.Begin();
-                batch.DrawString(gameFont, "GAME OVER!!!!", new Vector2(200, 0), Color.White);
-                batch.End();
                 // If the game is transitioning on or off, fade it out to black.
                 if (TransitionPosition > 0 || pauseAlpha > 0) 
                 {
@@ -424,6 +413,7 @@ namespace GCA2
                     ScreenManager.FadeBackBufferToBlack(alpha);
                 }
             }
+            base.Draw(gameTime);
         }
 
         #endregion

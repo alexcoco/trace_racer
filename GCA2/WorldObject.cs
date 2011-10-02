@@ -18,6 +18,7 @@ namespace GCA2
         SpriteBatch spriteBatch;
 
         List<WorldLine> lineQueue = new List<WorldLine>(800);
+        List<Gate> gateQueue = new List<Gate>(10);
 
         public PlayerObject player;
 
@@ -27,6 +28,27 @@ namespace GCA2
             spriteBatch = sb;
             player = new PlayerObject(game, sb, this);
             game.Components.Add(player);
+        }
+
+        public List<Gate> getGates()
+        {
+            return gateQueue;
+        }
+
+        public void createGates() {
+            gateQueue.Clear();
+            for (int j = 0; j < getGates().Capacity; j++)
+            {
+                gateQueue.Add(new Gate(game, spriteBatch, 200*j));
+            }
+        }
+
+        public void updateGates()
+        {
+            for (int i = 0; i < getGates().Count; i++)
+            {
+                gateQueue[i].position.X--;
+            }
         }
 
         public PlayerObject getPlayer()

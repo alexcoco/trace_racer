@@ -191,13 +191,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bg\background.png">
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="clouds\clud1.png">
       <Name>clud1</Name>
       <Importer>TextureImporter</Importer>
@@ -217,38 +210,6 @@
       <Name>clud4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="sounds\DownbeatBeep.mp3">
-      <Name>DownbeatBeep</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\FastBeep.mp3">
-      <Name>FastBeep</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GameOverLoop.mp3">
-      <Name>GameOverLoop</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GamePlayHalfBit.mp3">
-      <Name>GamePlayHalfBit</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GameStartDatahellBeta.mp3">
-      <Name>GameStartDatahellBeta</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GatePass.mp3">
-      <Name>GatePass</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +264,20 @@
       <Name>GatePass</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gameOverFont.spritefont">
+      <Name>gameOverFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bg\gameOver.png">
+      <Name>gameOver</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
