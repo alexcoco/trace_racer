@@ -59,10 +59,17 @@ namespace GCA2
             screenManager.AddScreen(new MainMenuScreen(), null);
 #endif
         }
-
+        protected override void Update(GameTime gameTime)
+        {
+            screenManager.Update(gameTime);
+            base.Update(gameTime);
+        }
         protected override void Draw(GameTime gameTime)
         {
+            
             graphics.GraphicsDevice.Clear(Color.Black);
+            Components.Clear();
+            screenManager.Draw(gameTime);
             base.Draw(gameTime);
         }
 
