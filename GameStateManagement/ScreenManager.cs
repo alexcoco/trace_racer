@@ -232,7 +232,7 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            foreach (GameScreen screen in screens.ToArray())
+            foreach (GameScreen screen in screens)
             {
                 if (screen.ScreenState == ScreenState.Hidden)
                     continue;

@@ -31,7 +31,7 @@ namespace GCA2
         public Vector2 position;
         static Random rand = new Random();
 
-        public Gate(Game g, SpriteBatch sb, int x)
+        public Gate(Game g, SpriteBatch sb, int x, int y)
             : base(g)
         {
             blueGate = g.Content.Load<Texture2D>("gates/BlueGate");
@@ -49,8 +49,7 @@ namespace GCA2
             game = g;
             spriteBatch = sb;
 
-            int value = rand.Next(0, TouchPanel.DisplayHeight / 2);
-            position = new Vector2(2000 + x, value);
+            position = new Vector2(2000 + x, y);
         }
         public override void Update(GameTime gameTime)
         {

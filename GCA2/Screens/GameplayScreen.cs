@@ -141,7 +141,9 @@ namespace GCA2
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, false);
-
+            TouchCollection touchCollection = TouchPanel.GetState();
+            if (!world.Game.Components.Contains(world.player))
+                world.Game.Components.Add(world.player);
             // Gradually fade in or out depending on whether we are covered by the pause screen.
             if (coveredByOtherScreen)
                 pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
@@ -150,14 +152,22 @@ namespace GCA2
 
             if (IsActive)
             {
-                if (!hasStarted || world.player.IsAlive & !world.player.gameOver)
+                if (!hasStarted && touchCollection.Count>0)
+                {
+                    TouchLocation tl = touchCollection[0];
+                    world.player.IsAlive = true;
+                    world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
+                    world.player.setActive();
+                    hasStarted = true;
+                }
+                else if (/*!hasStarted ||*/ world.player.IsAlive && !world.player.gameOver)
                 {
                     #region GAME LOGIC
 
                     for (int i = 0; i < gameTime.ElapsedGameTime.Milliseconds; i++)
                     {
 
-                        TouchCollection touchCollection = TouchPanel.GetState();
+                        
 
                         world.removeLine(0);
                         pressedLastX--;
@@ -301,12 +311,15 @@ namespace GCA2
                 else
                 {
                     //gameover
-                    TouchCollection touchCollection = TouchPanel.GetState();
+                    //TouchCollection touchCollection = TouchPanel.GetState();
                     foreach (TouchLocation tl in touchCollection)
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
                        
+                            ScreenManager.RemoveScreen(this);
+                            ScreenManager.AddScreen(new BackgroundScreen(), null);
+                            ScreenManager.AddScreen(new PhoneMainMenuScreen(), null);
                         }
                     }
                 }
@@ -390,6 +403,7 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
+            spriteManager.Draw(gameTime);
             if (world.player.gameOver)
             {
                 // If the game is transitioning on or off, fade it out to black.

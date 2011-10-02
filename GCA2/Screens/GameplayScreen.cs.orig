@@ -33,10 +33,6 @@ namespace GCA2
         ContentManager content;
         Vector2 touchPosition = new Vector2(0, 0);
 
-<<<<<<< Updated upstream
-        // parallax mngr
-=======
->>>>>>> Stashed changes
         SpriteManager spriteManager;
         WorldObject world;
         Boolean hasStarted = false;
@@ -47,11 +43,7 @@ namespace GCA2
         float pauseAlpha;
         InputAction pauseAction;
         int newLineY;
-<<<<<<< Updated upstream
-=======
-        SoundPlayer player;
         ParticleEngine part;
->>>>>>> Stashed changes
 
         #endregion
 
@@ -95,15 +87,8 @@ namespace GCA2
                     world.addLine(-1);
                 }
 
-<<<<<<< Updated upstream
-                // A real game would probably have more content than this sample, so
-                // it would take longer to load. We simulate that by delaying for a
-                // while, giving you a chance to admire the beautiful loading screen.
-=======
                 spriteManager = new SpriteManager(ScreenManager.Game, touchPosition, isPressed, world, part);
                 ScreenManager.Game.Components.Add(spriteManager);
-
->>>>>>> Stashed changes
                 Thread.Sleep(1000);
 
                 ScreenManager.Game.ResetElapsedTime();
@@ -115,15 +100,8 @@ namespace GCA2
                 // playerPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"];
                 // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
-#endif
-<<<<<<< Updated upstream
-=======
-
-            player = new SoundPlayer(ScreenManager.Game);
-            player.PlayGameMusic();
->>>>>>> Stashed changes
         }
-
+#endif
         public override void Deactivate()
         {
 #if WINDOWS_PHONE
@@ -163,7 +141,9 @@ namespace GCA2
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, false);
-
+            TouchCollection touchCollection = TouchPanel.GetState();
+            if (!world.Game.Components.Contains(world.player))
+                world.Game.Components.Add(world.player);
             // Gradually fade in or out depending on whether we are covered by the pause screen.
             if (coveredByOtherScreen)
                 pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
@@ -172,14 +152,22 @@ namespace GCA2
 
             if (IsActive)
             {
-                if (!hasStarted || world.player.IsAlive & !world.player.gameOver)
+                if (!hasStarted && touchCollection.Count>0)
+                {
+                    TouchLocation tl = touchCollection[0];
+                    world.player.IsAlive = true;
+                    world.fillBegin((int)tl.Position.X, TouchPanel.DisplayHeight - (int)tl.Position.Y);
+                    world.player.setActive();
+                    hasStarted = true;
+                }
+                else if (/*!hasStarted ||*/ world.player.IsAlive && !world.player.gameOver)
                 {
                     #region GAME LOGIC
 
                     for (int i = 0; i < gameTime.ElapsedGameTime.Milliseconds; i++)
                     {
 
-                        TouchCollection touchCollection = TouchPanel.GetState();
+                        
 
                         world.removeLine(0);
                         pressedLastX--;
@@ -301,7 +289,7 @@ namespace GCA2
                                         // Add score * ++mutiplier
                                         world.player.Score.Points += 10000 * (++world.player.Score.Multiplier);
                                         // Set gate off
-                                        nextGate.gate = nextGate.gatePassed;
+                                        nextGate.myTexture = Gate.gatePassed;
                                         nextGate.isHit = true;
                                     }
                                 }
@@ -323,21 +311,28 @@ namespace GCA2
                 else
                 {
                     //gameover
-                    TouchCollection touchCollection = TouchPanel.GetState();
+                    //TouchCollection touchCollection = TouchPanel.GetState();
                     foreach (TouchLocation tl in touchCollection)
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
+<<<<<<< Updated upstream
+                       
+=======
                             //ScreenManager.Game.Components.Remove(spriteManager);
                             //ScreenManager.Game.Components.Remove(parallaxManager);
                             //LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMenuScreen("Title"));
                             //System.Diagnostics.Debug.WriteLine("SdfdsF");
                             //LoadingScreen.Load(ScreenManager, true, PlayerIndex.One, new GameplayScreen());
+                            ScreenManager.RemoveScreen(this);
+                            ScreenManager.AddScreen(new BackgroundScreen(), null);
+                            ScreenManager.AddScreen(new PhoneMainMenuScreen(), null);
+>>>>>>> Stashed changes
                         }
                     }
                 }
                 // particles
-                part.EmitterLocation = new Vector2(world.player.Position.X-35, world.player.Position.Y+75);
+                part.EmitterLocation = new Vector2(world.player.Position.X - 35, world.player.Position.Y + 75);
                 part.Update();
             }
         }
@@ -416,14 +411,15 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
+            spriteManager.Draw(gameTime);
             if (world.player.gameOver)
             {
                 // If the game is transitioning on or off, fade it out to black.
                 if (TransitionPosition > 0 || pauseAlpha > 0)
                 {
                     float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
-                    #if WINDOWS_PHONE
-                ScreenManager.AddScreen(new PhonePauseScreen(), ControllingPlayer);
+#if WINDOWS_PHONE
+                    ScreenManager.AddScreen(new PhonePauseScreen(), ControllingPlayer);
 #else
                 ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
 #endif

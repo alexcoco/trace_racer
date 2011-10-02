@@ -14,6 +14,7 @@ namespace GCA2
     /// </summary>
     public class WorldObject : DrawableGameComponent
     {
+        static Random ran = new Random();
         Game game;
         SpriteBatch spriteBatch;
 
@@ -39,9 +40,16 @@ namespace GCA2
         public void createGates()
         {
             gateQueue.Clear();
-            for (int j = 0; j < getGates().Capacity; j++)
+            int yval = ran.Next(0, TouchPanel.DisplayHeight-107);
+
+            int randomness = ran.Next(10, getGates().Capacity+1);
+
+            int offset = ran.Next(0, 2);
+
+            for (int j = 0; j < randomness; j++)
             {
-                gateQueue.Add(new Gate(game, spriteBatch, 200 * j));
+                // TODO MAYBE CHANGE 200 TO VARYING X OVER TIME
+                gateQueue.Add(new Gate(game, spriteBatch, 200 * j, yval + (50*offset)));
             }
         }
 
