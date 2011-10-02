@@ -26,8 +26,8 @@ namespace GCA2
         #region Fields
 
         ContentManager content;
-        Texture2D backgroundTexture;
-
+        Texture2D[] textures;
+        public int position = 0;
         #endregion
 
         #region Initialization
@@ -40,13 +40,9 @@ namespace GCA2
         {
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            textures = new Texture2D[4];
         }
 
-        public Texture2D BackgroundTexture
-        {
-            get { return backgroundTexture; }
-            set { this.backgroundTexture = value; }
-        }
 
         /// <summary>
         /// Loads graphics content for this screen. The background texture is quite
@@ -62,7 +58,9 @@ namespace GCA2
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-                backgroundTexture = content.Load<Texture2D>("bg/TitleScreen");
+                textures[0] = content.Load<Texture2D>("background");
+                textures[1] = content.Load<Texture2D>("bg/HelpScreen");
+                textures[2] = content.Load<Texture2D>("bg/CreditsScreen");
             }
         }
 
@@ -106,10 +104,12 @@ namespace GCA2
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(backgroundTexture, fullscreen,
+            spriteBatch.Draw(textures[position], fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
             spriteBatch.End();
+            
+            base.Draw(gameTime);
         }
 
 

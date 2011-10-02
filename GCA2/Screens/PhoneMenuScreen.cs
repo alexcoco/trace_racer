@@ -135,7 +135,6 @@ namespace GCA2
             float titleScale = 1.25f;
 
             titlePosition.Y -= transitionOffset * 100;
-            spriteBatch.Draw(ScreenManager.Game.Content.Load<Texture2D>("TitleScreen"), new Vector2(), Color.White);
             spriteBatch.DrawString(font, menuTitle, titlePosition, titleColor, 0,
                                    titleOrigin, titleScale, SpriteEffects.None, 0);
 
