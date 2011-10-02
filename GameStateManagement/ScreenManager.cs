@@ -223,7 +223,7 @@ namespace GCA2
             foreach (GameScreen screen in screens)
                 screenNames.Add(screen.GetType().Name);
 
-            Debug.WriteLine(string.Join(", ", screenNames.ToArray()));
+            //Debug.WriteLine(string.Join(", ", screenNames.ToArray()));
         }
 
 
