@@ -23,8 +23,6 @@ Content\gates\gate0.xnb
 Content\gates\gate00.xnb
 Content\gates\gate1.xnb
 Content\gates\gate11.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
 Content\clouds\clud1.xnb
 Content\clouds\clud2.xnb
 Content\clouds\clud3.xnb
@@ -34,15 +32,26 @@ Content\bg\parallax_layer.xnb
 Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
 <<<<<<< Updated upstream
-=======
 Content\bg\gameOver.xnb
+Content\menufont.xnb
+Content\mainFont.xnb
+=======
 >>>>>>> Stashed changes
-Content\gameOverFont.xnb
 Content\sounds\DownbeatBeep.xnb
 Content\sounds\FastBeep.xnb
 Content\sounds\GameOverLoop.xnb
 Content\sounds\GamePlayHalfBit.xnb
 Content\sounds\GameStartDatahellBeta.xnb
 Content\sounds\GatePass.xnb
+<<<<<<< Updated upstream
+=======
 Content\bg\gameOver.xnb
 Content\mainFont.xnb
+Content\sprites\tree2.xnb
+Content\sprites\tree3.xnb
+Content\sprites\tree4.xnb
+Content\bg\CreditsScreen.xnb
+Content\bg\TitleScreen.xnb
+Content\gates\gatekeeper.xnb
+Content\tex\star.xnb
+>>>>>>> Stashed changes

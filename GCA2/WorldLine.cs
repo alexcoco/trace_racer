@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GCA2
 {
@@ -12,6 +13,9 @@ namespace GCA2
     {
         public int Height { get; set; }
 
+        // static Random r = new Random();
+        // public int texture;
+
         public WorldLine()
         {
             Height = 0;
@@ -20,7 +24,7 @@ namespace GCA2
         public WorldLine(int h)
         {
             Height = h;
+            // texture = r.Next(1000);
         }
-
     }
 }

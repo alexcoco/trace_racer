@@ -22,11 +22,17 @@ namespace GCA2
         Texture2D touchTexture;
         Texture2D tileGrass;
         Texture2D gameOverlay;
+        Texture2D background;
+        Texture2D tree2;
+        Texture2D tree3;
+        Texture2D tree4;
+        Texture2D gatekeeper;
         SpriteFont mainFont;
         WorldObject world;
         Boolean isPressed = false;
+        ParticleEngine part;
 
-        public SpriteManager(Game game, Vector2 touchPosition, Boolean isPressed, WorldObject world)
+        public SpriteManager(Game game, Vector2 touchPosition, Boolean isPressed, WorldObject world, ParticleEngine part)
             : base(game)
         {
             this.touchPosition = touchPosition;
@@ -34,6 +40,7 @@ namespace GCA2
             this.world = world;
 
             this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            this.part = part;
 
             if (content == null)
                 content = new ContentManager(Game.Services, "Content");
@@ -42,6 +49,12 @@ namespace GCA2
             touchTexture = content.Load<Texture2D>("sprites/touch");
             tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
             gameOverlay = content.Load<Texture2D>("bg/gameOver");
+            background = content.Load<Texture2D>("bg/background_gradient");
+            gatekeeper = content.Load<Texture2D>("gates/gatekeeper");
+
+            tree2 = content.Load<Texture2D>("sprites/tree2");
+            tree3 = content.Load<Texture2D>("sprites/tree3");
+            tree4 = content.Load<Texture2D>("sprites/tree4");
         }
 
         public override void Update(GameTime gameTime)
@@ -54,6 +67,8 @@ namespace GCA2
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             spriteBatch.Begin();
+
+            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
 
             if (!world.player.gameOver)
             {
@@ -70,18 +85,23 @@ namespace GCA2
                     drawPlayer(world);
                 }
 
+                if (!(world.getGates().Count == 0) && world.getGates()[0].position.X > 800 && world.getGates()[0].position.X < 1600) 
+                {
+                    spriteBatch.Draw(gatekeeper, new Vector2(735, world.getGates()[0].position.Y), Color.White);
+                }
+
                 for (int j = 0; j < world.getGates().Count; j++)
                 {
                     spriteBatch.Draw(world.getGates()[j].gate, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
                 }
 
                 // Display score - lose one precision digit and mask the second one
-                spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(15, 10), Color.White);
+                spriteBatch.DrawString(mainFont, "SCORE: " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(5, 0), Color.White);
             }
             else
             {
                 spriteBatch.Draw(gameOverlay, new Vector2(0, 0), Color.White);
-                spriteBatch.DrawString(mainFont, "SCORE: " + world.player.Score.Points, new Vector2(200 - mainFont.Spacing, 60), Color.White);
+                spriteBatch.DrawString(mainFont, "SCORE: " + world.player.Score.Points, new Vector2(200 - mainFont.Spacing, 200), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);
@@ -115,6 +135,7 @@ namespace GCA2
             }
 
             spriteBatch.Draw(world.player.Texture, world.player.Position, null, Color.White, rotationAngle, origin, 1f, SpriteEffects.None, 0);
+            part.Draw(spriteBatch);
         }
     }
 }

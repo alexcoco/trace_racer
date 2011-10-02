@@ -130,7 +130,7 @@ namespace GCA2
             ContentManager content = Game.Content;
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            font = content.Load<SpriteFont>("menufont");
+            font = content.Load<SpriteFont>("mainFont");
             blankTexture = content.Load<Texture2D>("blank");
 
             // Tell each of the screens to load their content.
@@ -232,7 +232,7 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            foreach (GameScreen screen in screens)
+            foreach (GameScreen screen in screens.ToArray())
             {
                 if (screen.ScreenState == ScreenState.Hidden)
                     continue;
