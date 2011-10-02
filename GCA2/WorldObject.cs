@@ -54,26 +54,37 @@ namespace GCA2
         }
 
         /// <summary>
-        /// Gets the closest gate that is on the same X as the current position or intersects on the X axis
+        /// Gets the closest gate that intersects with the player.
         /// </summary>
-        /// <param name="X"></param>
+        /// <param name="player"></param>
         /// <returns></returns>
-        public Gate getClosestGate(float X)
+        public Gate getClosestGate(PlayerObject player)
         {
             Gate closestGate = null;
-            // Start looking for a gate that is
-            // on the same X as the current position
-            // or intersects on the X axis
+
+            float gX, gY, gY2; // Gate Position X, Y
+            float pX, pY; // Player Position X,y
+            pX = player.Position.X + player.Texture.Width / 2;
+            pY = player.Position.Y + player.Texture.Height / 2;
+            
             foreach(Gate gate in gateQueue)
             {
-                if ((gate.position.X < X && gate.position.X + gate.gate.Width >= X && !gate.isHit) // the has been almost passed but not hit
-                    || X == gate.position.X) // the gate has the potential to intersect
+                gX = gate.position.X;
+                gY = gate.position.Y;
+
+                if ((gX <= pX) && (pX <= gX + gate.gate.Width)
+                    && (!gate.isHit)) // pX is in gate's width span
                 {
+                    gY2 = gY + gate.gate.Height;
+                    if(gY <= pY && pY <= gY2) // pY is intersecting the gate
+                    {
                     closestGate = gate;
                     break;
+                    }
                 }
-                else if (gate.position.X > X) // Gate is still far, don't look for next ones
+                else if (gX > pX)
                 {
+                    // This gate is still far, don't look for next ones in this cycle
                     break;
                 }
             }

@@ -299,18 +299,18 @@ namespace GCA2
                                 }
 
                                 // Detect player-gate collision
-                                Gate nextGate = world.getClosestGate(
-                                    world.player.Position.X + world.player.Texture.Width);// Get gates closest to the front
+                                Gate nextGate = world.getClosestGate(world.player);// Get gates closest intersecting gate
 
-                                if (nextGate != null    // there is a next gate
-                                    && !nextGate.isHit  // gate not yet hit
-                                    && nextGate.gate.Bounds.Intersects(world.player.Texture.Bounds)) // gate intersects with player
+                                if (nextGate != null)    // there is a next gate
                                 {
-                                    // Add score * ++mutiplier
-                                    world.player.Score.Points += 10000 * (++ world.player.Score.Multiplier);
-                                    // Set gate off
-                                    nextGate.gate = nextGate.gatePassed;
-                                    nextGate.isHit = true;
+                                    if (!nextGate.isHit)  // gate not yet hit
+                                    {
+                                        // Add score * ++mutiplier
+                                        world.player.Score.Points += 10000 * (++world.player.Score.Multiplier);
+                                        // Set gate off
+                                        nextGate.gate = nextGate.gatePassed;
+                                        nextGate.isHit = true;
+                                    }
                                 }
                                 else
                                 {
