@@ -316,10 +316,10 @@ namespace GCA2
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
-                       
+                       BackgroundScreen background = new BackgroundScreen();
                             ScreenManager.RemoveScreen(this);
-                            ScreenManager.AddScreen(new BackgroundScreen(), null);
-                            ScreenManager.AddScreen(new PhoneMainMenuScreen(), null);
+                            ScreenManager.AddScreen(background, null);
+                            ScreenManager.AddScreen(new PhoneMainMenuScreen(background), null);
                         }
                     }
                 }
@@ -411,7 +411,7 @@ namespace GCA2
                 {
                     float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
 #if WINDOWS_PHONE
-                    ScreenManager.AddScreen(new PhonePauseScreen(), ControllingPlayer);
+                    ScreenManager.AddScreen(new PhonePauseScreen(), null);
 #else
                 ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
 #endif

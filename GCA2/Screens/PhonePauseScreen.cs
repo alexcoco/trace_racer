@@ -44,8 +44,9 @@ namespace GCA2
         /// </summary>
         void exitButton_Tapped(object sender, EventArgs e)
         {
-            LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
-                                                           new PhoneMainMenuScreen());
+            BackgroundScreen background = new BackgroundScreen();
+            LoadingScreen.Load(ScreenManager, false, null, background,
+                                                           new PhoneMainMenuScreen(background));
         }
 
         protected override void OnCancel()

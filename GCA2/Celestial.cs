@@ -54,7 +54,7 @@ namespace GCA2
             screenManager.AddScreen(backgroundScreen, null);
 
 #if WINDOWS_PHONE
-            screenManager.AddScreen(new PhoneMainMenuScreen(), null);
+            screenManager.AddScreen(new PhoneMainMenuScreen(backgroundScreen), null);
 #else
             screenManager.AddScreen(new MainMenuScreen(), null);
 #endif
@@ -63,7 +63,8 @@ namespace GCA2
         {
             screenManager.Update(gameTime);
             base.Update(gameTime);
-        }
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             
