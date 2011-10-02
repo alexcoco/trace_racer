@@ -11,17 +11,17 @@ namespace GCA2
     {
         private static string filename = "highscore.dat";
 
-        public static void SaveHighscore(Score score)
+        public static void Save(Score score)
         {
-            SaveHighscore(((score.Points / 100) * 10).ToString());
+            Save(((score.Points / 100) * 10).ToString());
         }
 
-        public static void SaveHighscore(long score)
+        public static void Save(long score)
         {
-            SaveHighscore(score.ToString());
+            Save(score.ToString());
         }
 
-        public static void SaveHighscore(string score)
+        public static void Save(string score)
         {
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -37,7 +37,7 @@ namespace GCA2
             }
         }
 
-        public static long LoadHighscore()
+        public static long Load()
         {
             long score = 0L;
 
