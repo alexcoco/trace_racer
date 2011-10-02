@@ -316,7 +316,7 @@ namespace GCA2
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
-                       BackgroundScreen background = new BackgroundScreen();
+                        BackgroundScreen background = new BackgroundScreen();
                             ScreenManager.RemoveScreen(this);
                             ScreenManager.AddScreen(background, null);
                             ScreenManager.AddScreen(new PhoneMainMenuScreen(background), null);
