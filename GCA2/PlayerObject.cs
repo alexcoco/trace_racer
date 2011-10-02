@@ -28,6 +28,7 @@ namespace GCA2
         public Score Score { get; set; }
         Boolean isActive = false;
         public int airtime = 0;
+        public bool gameOver = false;
 
         private SpriteBatch mySpriteBatch;
 
@@ -88,8 +89,11 @@ namespace GCA2
 
             if (isActive)
             {
-                // Add points
-                Score.Points += Constants.POINTS;
+                if (!gameOver)
+                {
+                    // Add points
+                    Score.Points += Constants.POINTS;
+                }
                 //Position.X++;
                 int difference = World.getPositionDifference();
                 adjustSpeed(difference);
@@ -130,6 +134,7 @@ namespace GCA2
                     if (difference > TouchPanel.DisplayHeight*0.1)
                     {
                         IsAlive = false;
+                        gameOver = true;
                         Position.Y = TouchPanel.DisplayHeight;
                     }
 
@@ -141,6 +146,7 @@ namespace GCA2
                 if ((Position.Y + Texture.Height) > TouchPanel.DisplayHeight)
                 {
                     IsAlive = false;
+                    gameOver = true;
                 }
                 base.Update(gameTime);
             }
