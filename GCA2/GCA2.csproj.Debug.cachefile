@@ -33,13 +33,6 @@ Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
 Content\bg\gameOver.xnb
 Content\mainFont.xnb
-Content\sounds\DownbeatBeep.xnb
-Content\sounds\FastBeep.xnb
-Content\sounds\GameOverLoop.xnb
-Content\sounds\GamePlayHalfBit.xnb
-Content\sounds\GameStartDatahellBeta.xnb
-Content\sounds\GatePass.xnb
-Content\TitleScreen.xnb
 Content\sprites\tree2.xnb
 Content\sprites\tree3.xnb
 Content\sprites\tree4.xnb
@@ -47,3 +40,10 @@ Content\bg\CreditsScreen.xnb
 Content\bg\TitleScreen.xnb
 Content\gates\gatekeeper.xnb
 Content\tex\star.xnb
+Content\sounds\DownbeatBeep.xnb
+Content\sounds\FastBeep.xnb
+Content\sounds\GameOverLoop.xnb
+Content\sounds\GamePlayHalfBit.xnb
+Content\sounds\GameStartDatahellBeta.xnb
+Content\sounds\GatePass.xnb
+Content\mainFont.xnb

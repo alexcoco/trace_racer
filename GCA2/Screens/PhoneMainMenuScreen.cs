@@ -28,16 +28,16 @@ namespace GCA2
         {
 
         }
-        
- 
+
+
         void play()
         {
             // When the "Play" button is tapped, we load the GameplayScreen
             LoadingScreen.Load(ScreenManager, true, PlayerIndex.One, new GameplayScreen());
         }
-      
+
         void help()
-        {    
+        {
             foreach (GameScreen screen in ScreenManager.GetScreens())
             {
                 if (screen.GetType() == typeof(BackgroundScreen))
@@ -45,7 +45,7 @@ namespace GCA2
                     background = (BackgroundScreen)screen;
                     background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("HelpScreen");
                 }
-            }   
+            }
         }
         void credits()
         {
@@ -57,14 +57,7 @@ namespace GCA2
                     background = (BackgroundScreen)screen;
                     background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("CreditsScreen");
                 }
-            }   
-        }
-
-       
-        void menuButton_Tapped(object sender, EventArgs e)
-        {
-            backToMenu();
-
+            }
         }
 
         private void backToMenu()
@@ -89,29 +82,30 @@ namespace GCA2
                     if ((touchposition.X >= 0 && touchposition.X <= 200) && (touchposition.Y >= 420 && touchposition.Y <= 480))
                     {
                         play();
-                    }else if ((touchposition.X >= 600 && touchposition.X <= 800) && (touchposition.Y >= 420 && touchposition.Y <= 480))
+                    }
+                    else if ((touchposition.X >= 600 && touchposition.X <= 800) && (touchposition.Y >= 420 && touchposition.Y <= 480))
                     {
                         help();
                         currentMenuPage = 1;
-                        break;
-                    }else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
-                    {
-                        //TODO toggle to credits page
-                        currentMenuPage = 2;
-                        break;
                     }
-                } else if (currentMenuPage ==1)
-                {
-                    if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    else if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
-                        //TODO toggle to credits page
+                        credits();
+                        currentMenuPage = 2;
+                    }
+                }
+                else if (currentMenuPage == 1)
+                {
+                    if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    {
                         backToMenu();
                         currentMenuPage = 0;
                     }
-                    
-                } else if (currentMenuPage == 2)
+
+                }
+                else if (currentMenuPage == 2)
                 {
-                    if ((touchposition.X >= 725 && touchposition.X <= 800) && (touchposition.Y >= 0 && touchposition.Y <= 45))
+                    if ((touchposition.X >= 0 && touchposition.X <= 100) && (touchposition.Y >= 0 && touchposition.Y <= 45))
                     {
                         backToMenu();
                         currentMenuPage = 0;
