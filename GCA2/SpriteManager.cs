@@ -20,7 +20,7 @@ namespace GCA2
 
         Vector2 touchPosition = new Vector2(0, 0);
         Vector2 parallaxPosition = new Vector2(0, 40);
-        Vector2 parallaxSpeed = new Vector2(0.5f, 0);
+        Vector2 parallaxSpeed = new Vector2(1.0f, 0);
         Texture2D parallax;
         Texture2D touchTexture;
         Texture2D tileGrass;
