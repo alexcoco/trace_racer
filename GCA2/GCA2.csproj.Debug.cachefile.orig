@@ -1,8 +1,6 @@
 Content\background.xnb
 Content\blank.xnb
 Content\gradient.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
 Content\sprites\helpImage_0.xnb
 Content\sprites\helpImage_3.xnb
 Content\sprites\helpImage_1.xnb
@@ -12,7 +10,6 @@ Content\bike.xnb
 Content\tiles\WorldLineTexture.xnb
 Content\tiles\WorldLineTextureBlur.xnb
 Content\sprites\happycloud1.xnb
-Content\bg\background.xnb
 Content\bg\background_sun.xnb
 Content\gates\gate-closed-1.xnb
 Content\gates\gate-closed-ng0.xnb
@@ -26,12 +23,8 @@ Content\gates\gate0.xnb
 Content\gates\gate00.xnb
 Content\gates\gate1.xnb
 Content\gates\gate11.xnb
-<<<<<<< Updated upstream
-=======
-Content\bg\background.xnb
 Content\gamefont.xnb
 Content\menufont.xnb
->>>>>>> Stashed changes
 Content\clouds\clud1.xnb
 Content\clouds\clud2.xnb
 Content\clouds\clud3.xnb
@@ -40,33 +33,16 @@ Content\bg\background_gradient.xnb
 Content\bg\parallax_layer.xnb
 Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
+<<<<<<< Updated upstream
+=======
+Content\bg\gameOver.xnb
+>>>>>>> Stashed changes
+Content\gameOverFont.xnb
 Content\sounds\DownbeatBeep.xnb
 Content\sounds\FastBeep.xnb
 Content\sounds\GameOverLoop.xnb
 Content\sounds\GamePlayHalfBit.xnb
 Content\sounds\GameStartDatahellBeta.xnb
 Content\sounds\GatePass.xnb
-Content\sounds\DownbeatBeep.wma
-Content\sounds\FastBeep.wma
-Content\sounds\GameOverLoop.wma
-Content\sounds\GamePlayHalfBit.wma
-Content\sounds\DownbeatBeep.xnb
-Content\sounds\FastBeep.xnb
-Content\sounds\GameOverLoop.xnb
-Content\sounds\GamePlayHalfBit.xnb
-Content\sounds\GameStartDatahellBeta.xnb
-Content\sounds\GatePass.xnb
-Content\bg\background_gradient.xnb
-Content\bg\parallax_layer.xnb
-Content\bg\parallax_layer1.xnb
-Content\bg\parallax_layer2.xnb
-Content\sounds\DownbeatBeep.wma
-Content\sounds\FastBeep.wma
-Content\sounds\GameOverLoop.wma
-Content\sounds\GamePlayHalfBit.wma
-Content\sounds\GameStartDatahellBeta.wma
-Content\sounds\GatePass.wma
-Content\sounds\GameStartDatahellBeta.wma
-Content\sounds\GatePass.wma
+Content\bg\gameOver.xnb
+Content\mainFont.xnb

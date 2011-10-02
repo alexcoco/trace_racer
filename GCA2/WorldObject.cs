@@ -53,6 +53,34 @@ namespace GCA2
             }
         }
 
+        /// <summary>
+        /// Gets the closest gate that is on the same X as the current position or intersects on the X axis
+        /// </summary>
+        /// <param name="X"></param>
+        /// <returns></returns>
+        public Gate getClosestGate(float X)
+        {
+            Gate closestGate = null;
+            // Start looking for a gate that is
+            // on the same X as the current position
+            // or intersects on the X axis
+            foreach(Gate gate in gateQueue)
+            {
+                if ((gate.position.X < X && gate.position.X + gate.gate.Width >= X && !gate.isHit) // the has been almost passed but not hit
+                    || X == gate.position.X) // the gate has the potential to intersect
+                {
+                    closestGate = gate;
+                    break;
+                }
+                else if (gate.position.X > X) // Gate is still far, don't look for next ones
+                {
+                    break;
+                }
+            }
+
+            return closestGate;
+        }
+
         public PlayerObject getPlayer()
         {
             return player;

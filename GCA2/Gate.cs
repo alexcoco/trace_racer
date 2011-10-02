@@ -16,6 +16,7 @@ namespace GCA2
         public Game game;
         public SpriteBatch spriteBatch;
         public Texture2D gate;
+        public Texture2D gatePassed;
         public Vector2 position;
         public int numberOfMillies;
         static Random rand = new Random();
@@ -26,6 +27,7 @@ namespace GCA2
             game = g;
             spriteBatch = sb;
             gate = game.Content.Load<Texture2D>("gates/gate0");
+            gatePassed = game.Content.Load<Texture2D>("gates/gate1");
             numberOfMillies = 800;
             int value = rand.Next(0, TouchPanel.DisplayHeight/2);
             position = new Vector2(1000 + x, value);

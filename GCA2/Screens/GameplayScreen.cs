@@ -32,6 +32,8 @@ namespace GCA2
 
         ContentManager content;
         Vector2 touchPosition = new Vector2(0, 0);
+
+        // parallax mngr
         ParallaxManager parallaxManager;
         SpriteManager spriteManager;
         WorldObject world;
@@ -296,6 +298,29 @@ namespace GCA2
                                     isPressed = true;
                                 }
 
+                                // Detect player-gate collision
+                                Gate nextGate = world.getClosestGate(
+                                    world.player.Position.X + world.player.Texture.Width);// Get gates closest to the front
+
+                                if (nextGate != null    // there is a next gate
+                                    && !nextGate.isHit  // gate not yet hit
+                                    && nextGate.gate.Bounds.Intersects(world.player.Texture.Bounds)) // gate intersects with player
+                                {
+                                    // Add score * ++mutiplier
+                                    world.player.Score.Points += 10000 * (++ world.player.Score.Multiplier);
+                                    // Set gate off
+                                    nextGate.gate = nextGate.gatePassed;
+                                    nextGate.isHit = true;
+                                }
+                                else
+                                {
+                                    // Check multiplier and reset if needed
+                                    if (world.player.Score.Multiplier > 0)
+                                    {
+                                        world.player.Score.Multiplier = 0;
+                                    }
+                                }
+
                                 break;
                             }
                         }
@@ -316,6 +341,7 @@ namespace GCA2
                     }
                 }
             }
+
         }
 
         /// <summary>

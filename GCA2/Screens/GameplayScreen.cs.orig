@@ -32,26 +32,18 @@ namespace GCA2
 
         ContentManager content;
         Vector2 touchPosition = new Vector2(0, 0);
-
-        // parallax mngr
         ParallaxManager parallaxManager;
-
         SpriteManager spriteManager;
-
         WorldObject world;
-
         Boolean hasStarted = false;
-
         Boolean isPressed = false;
         int pressedLastX = 0;
         int pressedLastY = 0;
-
         Random random = new Random();
-
         float pauseAlpha;
-
         InputAction pauseAction;
         int newLineY;
+        SoundPlayer player;
 
         #endregion
 
@@ -112,6 +104,9 @@ namespace GCA2
                 // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
 #endif
+
+            player = new SoundPlayer(ScreenManager.Game);
+            player.PlayGameMusic();
         }
 
         private void InitParallex()
@@ -183,7 +178,7 @@ namespace GCA2
 
             if (IsActive)
             {
-                if (world.player.IsAlive)
+                if (world.player.IsAlive & !world.player.gameOver)
                 {
                     #region GAME LOGIC
 
@@ -301,26 +296,87 @@ namespace GCA2
                                     isPressed = true;
                                 }
 
+                                // Detect player-gate collision
+                                Gate nextGate = world.getClosestGate(world.player.Position.X);
+                                if (nextGate != null && PixelsIntersect(world.player.Texture, nextGate.gate))
+                                {
+                                    // Add score * ++mutiplier
+                                }
+                                else
+                                {
+                                    // Check multiplier
+                                }
+
                                 break;
                             }
                         }
                     }
                     #endregion
                 }
-            }
-            else
-            {
-                //gameover
-                TouchCollection touchCollection = TouchPanel.GetState();
-                foreach (TouchLocation tl in touchCollection)
+                else
                 {
-                    if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                    //gameover
+                    TouchCollection touchCollection = TouchPanel.GetState();
+                    foreach (TouchLocation tl in touchCollection)
                     {
-                        Unload();
-                        LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
+                        if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
+                        {
+                            //LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
+                        }
+                        break;
                     }
                 }
             }
+<<<<<<< Updated upstream
+=======
+
+
+        }
+        /// <summary>
+        /// Determines if there is overlap of the non-transparent pixels
+        /// between two sprites.
+        /// </summary>
+        /// <param name="dataA">Pixel data of the first sprite</param>
+        /// <param name="dataB">Pixel data of the second sprite</param>
+        private bool PixelsIntersect(Texture2D texture1, Texture2D texture2)
+        {
+            Rectangle rectangleA = texture1.Bounds;
+            Rectangle rectangleB = texture2.Bounds;
+
+            Color[] dataA = new Color[texture1.Width * texture1.Height];
+            Color[] dataB = new Color[texture2.Width * texture2.Height];
+            texture1.GetData(dataA);
+            texture2.GetData(dataB);
+
+            // Find the bounds of the rectangle intersection
+            int top = Math.Max(rectangleA.Top, rectangleB.Top);
+            int bottom = Math.Min(rectangleA.Bottom, rectangleB.Bottom);
+            int left = Math.Max(rectangleA.Left, rectangleB.Left);
+            int right = Math.Min(rectangleA.Right, rectangleB.Right);
+
+            // Check every point within the intersection bounds
+            for (int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    // Get the color of both pixels at this point
+                    Color colorA = dataA[(x - rectangleA.Left) +
+                                         (y - rectangleA.Top) * rectangleA.Width];
+                    Color colorB = dataB[(x - rectangleB.Left) +
+                                         (y - rectangleB.Top) * rectangleB.Width];
+
+                    // If both pixels are not completely transparent,
+                    if (colorA.A != 0 && colorB.A != 0)
+                    {
+                        // then an intersection has been found
+                        return true;
+                    }
+                }
+            }
+
+            // No intersection found
+            return false;
+>>>>>>> Stashed changes
         }
 
         /// <summary>
@@ -399,15 +455,8 @@ namespace GCA2
         {
             if (world.player.gameOver)
             {
-<<<<<<< Updated upstream
-=======
-                SpriteBatch batch = new SpriteBatch(spriteManager.GraphicsDevice);
-                batch.Begin();
-                //batch.DrawString(gameFont, "GAME OVER!!!!", new Vector2(200, 0), Color.White);
-                batch.End();
->>>>>>> Stashed changes
                 // If the game is transitioning on or off, fade it out to black.
-                if (TransitionPosition > 0 || pauseAlpha > 0) 
+                if (TransitionPosition > 0 || pauseAlpha > 0)
                 {
                     float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
 
