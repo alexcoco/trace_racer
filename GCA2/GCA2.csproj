@@ -82,6 +82,7 @@
     <Compile Include="Screens\PhoneMainMenuScreen.cs" />
     <Compile Include="Screens\PhoneMenuScreen.cs" />
     <Compile Include="Screens\PhonePauseScreen.cs" />
+    <Compile Include="SoundPlayer.cs" />
     <Compile Include="SpriteManager.cs" />
     <Compile Include="WorldLine.cs" />
     <Compile Include="WorldObject.cs" />

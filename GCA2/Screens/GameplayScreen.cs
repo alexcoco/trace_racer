@@ -54,6 +54,8 @@ namespace GCA2
         InputAction pauseAction;
         int newLineY;
 
+        SoundPlayer player;
+
         #endregion
 
         #region Initialization
@@ -113,6 +115,9 @@ namespace GCA2
                 // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
 #endif
+
+            player = new SoundPlayer(ScreenManager.Game);
+            player.PlayGameMusic();
         }
 
         private void InitParallex()
