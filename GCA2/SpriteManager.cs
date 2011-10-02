@@ -29,8 +29,7 @@ namespace GCA2
         //tiles
         Texture2D tileGrass;
 
-        // bg
-        Texture2D background;
+        Texture2D gate0;
 
         SpriteFont gameFont;
         WorldObject world;
@@ -54,7 +53,7 @@ namespace GCA2
             touchTexture = content.Load<Texture2D>("sprites/touch");
             tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
             happyCloud1 = content.Load<Texture2D>("sprites/happyCloud1");
-            background = content.Load<Texture2D>("bg/background");
+            gate0 = content.Load<Texture2D>("gates/gate0");
         }
 
         public override void Update(GameTime gameTime)
@@ -101,10 +100,15 @@ namespace GCA2
             //   + "\nPx: " + pressedLastX
             //   + "\nPy: " + pressedLastY,
             //   new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
+            //spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
 
             // Display score - lose one precision digit and mask the second one
             spriteBatch.DrawString(gameFont, "POINTS " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(15, 10), Color.White);
+
+            for (int j = 0; j < world.getGates().Count; j++)
+            {
+                spriteBatch.Draw(world.getGates()[j].gate, new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y), Color.White);
+            }
 
             if (world.player.gameOver)
             {

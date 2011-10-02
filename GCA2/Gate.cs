@@ -12,32 +12,31 @@ namespace GCA2
 
     public class Gate : DrawableGameComponent
     {
+        public Boolean isHit;
         public Game game;
         public SpriteBatch spriteBatch;
         public Texture2D gate;
         public Vector2 position;
         public int numberOfMillies;
         static Random rand = new Random();
-        public Gate(Game g, SpriteBatch sb)
+        public Gate(Game g, SpriteBatch sb, int x)
             : base(g)
         {
+            isHit = false;
             game = g;
             spriteBatch = sb;
-            gate = game.Content.Load<Texture2D>("sprites/gates/gate");
+            gate = game.Content.Load<Texture2D>("gates/gate0");
             numberOfMillies = 800;
             int value = rand.Next(0, TouchPanel.DisplayHeight/2);
-            position = new Vector2(800+ numberOfMillies, value );
+            position = new Vector2(1000 + x, value);
         }
         public override void Update(GameTime gameTime)
         {
-            position.X--;
+            //position.X--;
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(gate,new Rectangle((int)position.X, (int)position.Y, gate.Width, gate.Height), Color.White);
-            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

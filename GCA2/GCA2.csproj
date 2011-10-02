@@ -85,6 +85,7 @@
     <Compile Include="SpriteManager.cs" />
     <Compile Include="WorldLine.cs" />
     <Compile Include="WorldObject.cs" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\AppManifest.xml">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </None>

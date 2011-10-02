@@ -23,7 +23,8 @@ Content\gates\gate0.xnb
 Content\gates\gate00.xnb
 Content\gates\gate1.xnb
 Content\gates\gate11.xnb
-Content\bg\background.xnb
+Content\gamefont.xnb
+Content\menufont.xnb
 Content\clouds\clud1.xnb
 Content\clouds\clud2.xnb
 Content\clouds\clud3.xnb
@@ -32,12 +33,10 @@ Content\bg\background_gradient.xnb
 Content\bg\parallax_layer.xnb
 Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
-Content\gamefont.xnb
-Content\menufont.xnb
+Content\gameOverFont.xnb
 Content\sounds\DownbeatBeep.xnb
 Content\sounds\FastBeep.xnb
 Content\sounds\GameOverLoop.xnb
 Content\sounds\GamePlayHalfBit.xnb
 Content\sounds\GameStartDatahellBeta.xnb
 Content\sounds\GatePass.xnb
-Content\gameOverFont.xnb
