@@ -62,27 +62,32 @@ namespace GCA2
         {
             Gate closestGate = null;
 
-            float gX, gY, gY2; // Gate Position X, Y
-            float pX, pY; // Player Position X,y
-            pX = player.Position.X + player.Texture.Width / 2;
-            pY = player.Position.Y + player.Texture.Height / 2;
+            float gX, gX2, gY, gY2; // Gate Position X, Y
+            float pX, pX2, pY, pY2; // Player Position X,y
+            pX = player.Position.X;
+            pX2 = player.Position.X + player.Texture.Width;
+            pY = player.Position.Y;
+            pY2 = player.Position.Y + player.Texture.Height;
             
             foreach(Gate gate in gateQueue)
             {
                 gX = gate.position.X;
+                gX2 = gX + gate.gate.Width;
                 gY = gate.position.Y;
+                gY2 = gY + gate.gate.Height;
 
-                if ((gX <= pX) && (pX <= gX + gate.gate.Width)
-                    && (!gate.isHit)) // pX is in gate's width span
+                if (!gate.isHit && 
+                    ((gX <= pX) && (pX <= gX2) ||
+                    (gX <= pX2) && (pX2 <= gX2))) // player and gate intersect on X
                 {
-                    gY2 = gY + gate.gate.Height;
-                    if(gY <= pY && pY <= gY2) // pY is intersecting the gate
+                    if ((gY <= pY) && (pY <= gY2) ||
+                        (gY <= pY2) && (pY2 <= gY2)) // player and gate intersect on Y
                     {
-                    closestGate = gate;
-                    break;
+                        closestGate = gate;
+                        break;
                     }
                 }
-                else if (gX > pX)
+                else if (gX > pX2)
                 {
                     // This gate is still far, don't look for next ones in this cycle
                     break;

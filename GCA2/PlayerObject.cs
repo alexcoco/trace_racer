@@ -92,7 +92,9 @@ namespace GCA2
                 if (!gameOver)
                 {
                     // Add points
-                    Score.Points += Constants.POINTS;
+                    int airborne = 1;
+                    if (airtime > 10) { airborne = 3; } // add extra if he's in the air
+                    Score.Points += Constants.POINTS * airborne;
                 }
                 //Position.X++;
                 int difference = World.getPositionDifference();
