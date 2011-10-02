@@ -19,6 +19,9 @@ namespace GCA2
         ContentManager content;
 
         Vector2 touchPosition = new Vector2(0, 0);
+        Vector2 parallaxPosition = new Vector2(0, 40);
+        Vector2 parallaxSpeed = new Vector2(0.5f, 0);
+        Texture2D parallax;
         Texture2D touchTexture;
         Texture2D tileGrass;
         Texture2D gameOverlay;
@@ -50,6 +53,7 @@ namespace GCA2
             tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
             gameOverlay = content.Load<Texture2D>("bg/gameOver");
             background = content.Load<Texture2D>("bg/background_gradient");
+            parallax = content.Load<Texture2D>("bg/parallax_layer_cont");
             gatekeeper = content.Load<Texture2D>("gates/gatekeeper");
 
             tree2 = content.Load<Texture2D>("sprites/tree2");
@@ -59,6 +63,16 @@ namespace GCA2
 
         public override void Update(GameTime gameTime)
         {
+            if (parallaxPosition.X > -800f)
+            {
+                parallaxPosition -= parallaxSpeed;
+            }
+            else
+            {
+                // Reset the position
+                parallaxPosition.X = 0;
+            }
+
             base.Update(gameTime);
         }
 
@@ -74,6 +88,7 @@ namespace GCA2
 
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(parallax, parallaxPosition, Color.White);
 
             if (!world.player.gameOver)
             {
