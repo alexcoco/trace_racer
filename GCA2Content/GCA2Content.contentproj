@@ -220,38 +220,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sounds\DownbeatBeep.mp3">
-      <Name>DownbeatBeep</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\FastBeep.mp3">
-      <Name>FastBeep</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GameOverLoop.mp3">
-      <Name>GameOverLoop</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GamePlayHalfBit.mp3">
-      <Name>GamePlayHalfBit</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GameStartDatahellBeta.mp3">
-      <Name>GameStartDatahellBeta</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="sounds\GatePass.mp3">
-      <Name>GatePass</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="bg\background_gradient.png">
       <Name>background_gradient</Name>
       <Importer>TextureImporter</Importer>
@@ -306,10 +274,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gameOver.png">
-      <Name>gameOver</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+    <Compile Include="gameOverFont.spritefont">
+      <Name>gameOverFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
