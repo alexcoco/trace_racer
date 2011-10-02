@@ -62,7 +62,7 @@ namespace GCA2
         {
             Gate closestGate = null;
 
-            float gX, gX2, gY, gY2; // Gate Position X, Y
+            float gX, gX2, gY, gY2; // Gate Position X, Y - should be 10px less on Y due to perspective
             float pX, pX2, pY, pY2; // Player Position X,y
             pX = player.Position.X;
             pX2 = player.Position.X + player.Texture.Width;
@@ -73,8 +73,8 @@ namespace GCA2
             {
                 gX = gate.position.X;
                 gX2 = gX + gate.myTexture.Width;
-                gY = gate.position.Y;
-                gY2 = gY + gate.myTexture.Height;
+                gY = gate.position.Y +10;
+                gY2 = gY + gate.myTexture.Height -25;
 
                 if (!gate.isHit && 
                     ((gX <= pX) && (pX <= gX2) ||
