@@ -26,59 +26,30 @@ namespace GCA2
         public PhoneMainMenuScreen()
             : base("Main Menu")
         {
-            setUpMenuButtons();
-        }
 
-        private void setUpMenuButtons()
-        {
-            // Create a button to start the game
-            Button playButton = new Button("Play");
-            playButton.Tapped += playButton_Tapped;
-            MenuButtons.Add(playButton);
-
-            BooleanButton musicButton = new BooleanButton("Music", true);
-            musicButton.Tapped += musicButton_Tapped;
-            MenuButtons.Add(musicButton);
-
-            Button helpButton = new Button("HELP");
-            helpButton.Tapped += helpButton_Tapped;
-            MenuButtons.Add(helpButton);
-
-            Button quitButton = new Button("Quit");
-            quitButton.Tapped += quitButton_Tapped;
-            MenuButtons.Add(quitButton);
         }
         
-        void playButton_Tapped(object sender, EventArgs e)
+ 
+        void play()
         {
             // When the "Play" button is tapped, we load the GameplayScreen
             LoadingScreen.Load(ScreenManager, true, PlayerIndex.One, new GameplayScreen());
         }
-        void musicButton_Tapped(object sender, EventArgs e)
-        {
-            BooleanButton button = sender as BooleanButton;
-
-            // In a real game, you'd want to store away the value of 
-            // the button to turn off music here. :)
-        }
-
-        void helpButton_Tapped(object sender, EventArgs e)
+      
+        void help()
         {
             MenuButtons.Clear();
             this.menuTitle = "Help";
             setUpHelpButtons();
-           
-
             foreach (GameScreen screen in ScreenManager.GetScreens())
             {
                 if (screen.GetType() == typeof(BackgroundScreen))
                 {
-                     background = (BackgroundScreen)screen;
+                    background = (BackgroundScreen)screen;
                     background.BackgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("sprites/helpImage_" + 0);
                 }
             }   
         }
-
         private void setUpHelpButtons()
         {
             Button menuButton = new Button("Menu");
@@ -137,21 +108,27 @@ namespace GCA2
             ScreenManager.RemoveScreen(this);
             ScreenManager.AddScreen(new BackgroundScreen(), null);
             ScreenManager.AddScreen(this, null);
-            setUpMenuButtons();
             this.menuTitle = "Main Menu";
             this.Activate(true);
 
         }
 
-        void quitButton_Tapped(object sender, EventArgs e)
+        public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
-            OnCancel();
-        }
-
-        protected override void OnCancel()
-        {
-            ScreenManager.Game.Exit();
-            base.OnCancel();
+            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+            TouchCollection touchCollection = TouchPanel.GetState();
+            foreach (TouchLocation tl in touchCollection)
+            {
+                Vector2 touchposition = tl.Position;
+                if ((touchposition.X >= 0 && touchposition.X <= 200)&& (touchposition.Y >= 420 && touchposition.Y <= 480))
+                {
+                    play();
+                }
+                if ((touchposition.X >= 600 && touchposition.X <= 800) && (touchposition.Y >= 420 && touchposition.Y <= 480))
+                {
+                    help();
+                }
+            }
         }
     }
 }
