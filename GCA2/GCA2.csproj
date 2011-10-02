@@ -70,7 +70,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Gate.cs" />
-    <Compile Include="ParallaxManager.cs" />
+    <Compile Include="ParticleEngine.cs" />
     <Compile Include="PlayerObject.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="ScreenFactory.cs" />
@@ -111,7 +111,7 @@
     </ProjectReference>
     <ProjectReference Include="..\GCA2Content\GCA2Content.contentproj">
       <Project>{8AAFC098-E9CD-42EA-8240-E4C99270EC63}</Project>
-      <Name>GCA2Content %28Content%29</Name>
+      <Name>GCA2Content2 %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>
