@@ -124,17 +124,21 @@ namespace GCA2
                     // Collision
                     airtime = 0;
 
-                    if (Math.Abs(difference) > 5)
+                    if (difference > TouchPanel.DisplayHeight*0.1)
                     {
-                        endGame();
+                        IsAlive = false;
+                        Position.Y = TouchPanel.DisplayHeight;
                     }
+
                     do
                     {
-                        //TODO: FINE TUNE THIS BITCH
                         Position.Y--;
                     } while (World.getPositionDifference() > 0);
                 }
-
+                if ((Position.Y + Texture.Height) > TouchPanel.DisplayHeight)
+                {
+                    IsAlive = false;
+                }
                 base.Update(gameTime);
             }
         }
@@ -190,13 +194,6 @@ namespace GCA2
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-        }
-        /// <summary>
-        /// This method will end the game.
-        /// </summary>
-        private void endGame()
-        {
-
         }
     }
 }

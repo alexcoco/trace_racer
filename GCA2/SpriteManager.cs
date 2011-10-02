@@ -99,7 +99,6 @@ namespace GCA2
             //   + "\nPx: " + pressedLastX
             //   + "\nPy: " + pressedLastY,
             //   new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
