@@ -156,7 +156,7 @@ namespace GCA2
                 {
                     TouchLocation tl = touchCollection[0];
                     world.player.IsAlive = true;
-                    world.fillBegin((int)tl.Position.X+1, TouchPanel.DisplayHeight - (int)tl.Position.Y);
+                    world.fillBegin(((int)tl.Position.X)+1, TouchPanel.DisplayHeight - (int)tl.Position.Y);
                     world.player.setActive();
                     hasStarted = true;
                 }
@@ -166,6 +166,9 @@ namespace GCA2
 
                     for (int i = 0; i < gameTime.ElapsedGameTime.Milliseconds; i++)
                     {
+
+                        
+
                         world.removeLine(0);
                         pressedLastX--;
 
@@ -320,6 +323,9 @@ namespace GCA2
                         }
                     }
                 }
+                // particles
+                part.EmitterLocation = new Vector2(world.player.Position.X - 35, world.player.Position.Y + 75);
+                part.Update();
             }
         }
 
