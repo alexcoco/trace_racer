@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
 
-namespace GCA2
+namespace TraceRacer
 {
     public class GameStateManagementGame : Microsoft.Xna.Framework.Game
     {

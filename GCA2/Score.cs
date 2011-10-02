@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// Keeps track of the number of points that the player scored.
@@ -13,13 +13,13 @@ namespace GCA2
     {
         public long Points { get; set; }
         public int Multiplier { get; set; }
-        public long Highscore { get; set; }
+        //public long Highscore { get; set; }
 
         public Score(Game game) : base(game)
         {
             Points = 0;
             Multiplier = 0;
-            Highscore = GCA2.Highscore.Load();
+            //Highscore = TraceRacer.Highscore.Load();
         }
     }
 }

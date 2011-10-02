@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 #endregion
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// The loading screen coordinates transitions between the menu system and the

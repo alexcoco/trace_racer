@@ -5,7 +5,7 @@ using System.Text;
 using System.IO.IsolatedStorage;
 using System.IO;
 
-namespace GCA2
+namespace TraceRacer
 {
     public class Highscore
     {

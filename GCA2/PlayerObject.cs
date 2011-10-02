@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
 
-namespace GCA2
+namespace TraceRacer
 {
     /// <summary>
     /// This is the player game component.
@@ -47,7 +47,7 @@ namespace GCA2
             Texture = Game.Content.Load<Texture2D>("bike");
 
             Speed = new Vector2(Constants.NORMAL_SPEED, 0);
-            Score = new GCA2.Score(game);
+            Score = new TraceRacer.Score(game);
             //Position = new Vector2(Speed.X, -Texture.Height);
             Position = new Vector2(100, -Texture.Height);
             CurrentLine = world.getLine((int)Position.X);
