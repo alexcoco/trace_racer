@@ -50,6 +50,8 @@ namespace GCA2
         // parallax mngr
         ParallaxManager parallaxManager;
 
+        SpriteManager spriteManager;
+
         WorldObject world;
 
         Boolean hasStarted = false;
@@ -95,11 +97,11 @@ namespace GCA2
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-                gameFont = content.Load<SpriteFont>("gamefont");
-                touchTexture = content.Load<Texture2D>("sprites/touch");
-                tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
-                happyCloud1 = content.Load<Texture2D>("sprites/happyCloud1");
-                background = content.Load<Texture2D>("bg/background");
+                //gameFont = content.Load<SpriteFont>("gamefont");
+                //touchTexture = content.Load<Texture2D>("sprites/touch");
+                //tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
+                //happyCloud1 = content.Load<Texture2D>("sprites/happyCloud1");
+                //background = content.Load<Texture2D>("bg/background");
 
                 world = new WorldObject(ScreenManager.Game, ScreenManager.SpriteBatch);
 
@@ -134,19 +136,42 @@ namespace GCA2
 
         private void InitParallex()
         {
+            spriteManager = new SpriteManager(ScreenManager.Game, touchPosition, isPressed, world);
+
             parallaxManager = new ParallaxManager(ScreenManager.Game);
             parallaxManager.DrawOrder = 0;
 
             // repeating clouds
-            Texture2D layerTexture = content.Load<Texture2D>("sprites/happycloud1");
-            Rectangle rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 50.0f, true, layerTexture, new Vector2(800 + layerTexture.Width, 10), rect);
+            Texture2D layerTexture = content.Load<Texture2D>("bg/parallax_layer");
+            Rectangle  rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            parallaxManager.AddLayer(0, 150.0f, true, layerTexture, new Vector2(layerTexture.Width, 10), rect);
 
-            layerTexture = content.Load<Texture2D>("sprites/happycloud1");
+            //layerTexture = content.Load<Texture2D>("clouds/clud1");
+            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            //parallaxManager.AddLayer(0, 90.0f, true, layerTexture, new Vector2(layerTexture.Width, 10), rect);
+
+            //layerTexture = content.Load<Texture2D>("clouds/clud2");
+            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            //parallaxManager.AddLayer(0, 100.0f, true, layerTexture, new Vector2(layerTexture.Width, 15), rect);
+
+            //layerTexture = content.Load<Texture2D>("clouds/clud3");
+            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            //parallaxManager.AddLayer(0, 100.0f, true, layerTexture, new Vector2(layerTexture.Width, 15), rect);
+
+            //layerTexture = content.Load<Texture2D>("clouds/clud4");
+            //rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
+            //parallaxManager.AddLayer(0, 100.0f, true, layerTexture, new Vector2(layerTexture.Width, 15), rect);
+
+            layerTexture = content.Load<Texture2D>("bg/background_gradient");
             rect = new Rectangle(0, 0, layerTexture.Width, layerTexture.Height);
-            parallaxManager.AddLayer(0, 10.0f, true, layerTexture, new Vector2(800 + layerTexture.Width, 15), rect);
+            parallaxManager.AddLayer(0, 0.0f, true, layerTexture, new Vector2(layerTexture.Width, 0), rect);
+
+
+
+
 
             ScreenManager.Game.Components.Add(parallaxManager);
+            ScreenManager.Game.Components.Add(spriteManager);
         }
 
         public override void Deactivate()
@@ -387,35 +412,6 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-
-
-            // Our player and enemy are both actually just text strings.
-            SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
-            //spriteBatch.Draw(happyCloud1, new Vector2(10, 10), new Rectangle(-1, 0, happyCloud1.Width, happyCloud1.Height), Color.White);
-
-
-            if (isPressed)
-                spriteBatch.Draw(touchTexture, new Vector2(touchPosition.X - 40, touchPosition.Y - 40), Color.White);
-
-            for (int i = 0; i < world.getLineQueue().Count; i++)
-            {
-                spriteBatch.Draw(tileGrass, new Vector2(i, 480 - world.getLineQueue()[i].Height), Color.White);
-            }
-
-            spriteBatch.DrawString(gameFont, touchPosition.X + " " + touchPosition.Y + " " + newLineY + " " + pressedLastY, new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(gameFont,
-                 "Tx: " + touchPosition.X
-               + "\nTy: " + touchPosition.Y
-               + "\nNy: " + newLineY
-               + "\nPx: " + pressedLastX
-               + "\nPy: " + pressedLastY,
-               new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(gameFont, isPressed + "", new Vector2(0, 200), Color.White);
-            spriteBatch.End();
-
             // If the game is transitioning on or off, fade it out to black.
             if (TransitionPosition > 0 || pauseAlpha > 0)
             {

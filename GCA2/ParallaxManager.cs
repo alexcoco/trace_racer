@@ -164,7 +164,7 @@ namespace GCA2
             {
                 if (layer.isSeamless)
                 {
-                    layer.position.X -= layer.scrollSpeed * timeDelta;
+                    layer.position.X += layer.scrollSpeed * timeDelta;
                     layer.position.X = layer.position.X % layer.layerTexture.Width;
                 }
                 else
