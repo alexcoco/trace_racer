@@ -46,6 +46,7 @@ namespace GCA2
             Texture = Game.Content.Load<Texture2D>("bike");
 
             Speed = new Vector2(Constants.NORMAL_SPEED, 0);
+            Score = new GCA2.Score(game);
             //Position = new Vector2(Speed.X, -Texture.Height);
             Position = new Vector2(100, -Texture.Height);
             CurrentLine = world.getLine((int)Position.X);
@@ -87,6 +88,8 @@ namespace GCA2
 
             if (isActive)
             {
+                // Add points
+                Score.Points += Constants.POINTS;
                 //Position.X++;
                 int difference = World.getPositionDifference();
                 adjustSpeed(difference);

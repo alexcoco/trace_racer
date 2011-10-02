@@ -17,5 +17,7 @@ namespace GCA2
         public const float ROTATION_ANGLE_UP = -0.5f % MathHelper.Pi;
         public const float ROTATION_ANGLE_NORMAL = 0f;
         public const float ROTATION_ANGLE_DOWN = 0.25f % MathHelper.Pi;
+
+        public const long POINTS = 5;
     }
 }

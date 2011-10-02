@@ -11,11 +11,10 @@ namespace GCA2
     /// </summary>
     public class Score : DrawableGameComponent
     {
-        public long Points {get; set;}
+        public long Points { get; set; }
         public int Multiplier { get; set; }
-        private PlayerObject player;
 
-        public Score(Game game, PlayerObject player) : base(game)
+        public Score(Game game) : base(game)
         {
             Points = 0;
             Multiplier = 0;
