@@ -31,15 +31,18 @@ Content\bg\background_gradient.xnb
 Content\bg\parallax_layer.xnb
 Content\bg\parallax_layer1.xnb
 Content\bg\parallax_layer2.xnb
+Content\bg\gameOver.xnb
+<<<<<<< HEAD
+Content\mainFont.xnb
 Content\sounds\DownbeatBeep.xnb
 Content\sounds\FastBeep.xnb
 Content\sounds\GameOverLoop.xnb
 Content\sounds\GamePlayHalfBit.xnb
 Content\sounds\GameStartDatahellBeta.xnb
 Content\sounds\GatePass.xnb
-<<<<<<< Updated upstream
-Content\bg\gameOver.xnb
-Content\mainFont.xnb
+Content\TitleScreen.xnb
+=======
+>>>>>>> de1344650598660c5a0f4ca79bcf52ab1e689d55
 Content\sprites\tree2.xnb
 Content\sprites\tree3.xnb
 Content\sprites\tree4.xnb
@@ -47,6 +50,14 @@ Content\bg\CreditsScreen.xnb
 Content\bg\TitleScreen.xnb
 Content\gates\gatekeeper.xnb
 Content\tex\star.xnb
+<<<<<<< HEAD
 =======
->>>>>>> Stashed changes
 Content\TitleScreen.xnb
+Content\sounds\DownbeatBeep.xnb
+Content\sounds\FastBeep.xnb
+Content\sounds\GameOverLoop.xnb
+Content\sounds\GamePlayHalfBit.xnb
+Content\sounds\GameStartDatahellBeta.xnb
+Content\sounds\GatePass.xnb
+Content\mainFont.xnb
+>>>>>>> de1344650598660c5a0f4ca79bcf52ab1e689d55

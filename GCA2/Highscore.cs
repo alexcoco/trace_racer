@@ -11,7 +11,7 @@ namespace GCA2
     {
         private static sealed string filename = "highscore.dat";
 
-        private void SaveHighscore(Score score)
+        public static void SaveHighscore(Score score)
         {
             SaveHighscore(((score.Points / 100) * 10).ToString());
         }
