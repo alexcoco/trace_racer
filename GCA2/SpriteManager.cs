@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
 namespace GCA2
@@ -33,7 +34,7 @@ namespace GCA2
 
         SpriteFont gameFont;
         WorldObject world;
-
+        SpriteFont gameOverFont;
         Boolean isPressed = false;
 
         public SpriteManager(Game game, Vector2 touchPosition, Boolean isPressed, WorldObject world)
@@ -49,6 +50,7 @@ namespace GCA2
                 content = new ContentManager(Game.Services, "Content");
 
             gameFont = content.Load<SpriteFont>("gamefont");
+            gameOverFont = content.Load<SpriteFont>("gameOverFont");
             touchTexture = content.Load<Texture2D>("sprites/touch");
             tileGrass = content.Load<Texture2D>("tiles/WorldLineTexture");
             happyCloud1 = content.Load<Texture2D>("sprites/happyCloud1");
@@ -104,6 +106,11 @@ namespace GCA2
             // Display score - lose one precision digit and mask the second one
             spriteBatch.DrawString(gameFont, "POINTS " + (world.player.Score.Points / 100 * 10).ToString(), new Vector2(15, 10), Color.White);
 
+            if (world.player.gameOver)
+            {
+               
+                spriteBatch.DrawString(gameOverFont, "GAME OVER",  new Vector2((int)((TouchPanel.DisplayHeight / 2) - gameOverFont.Spacing), (TouchPanel.DisplayWidth / 2)), Color.White);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }

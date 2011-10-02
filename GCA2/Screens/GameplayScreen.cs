@@ -405,12 +405,8 @@ namespace GCA2
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            if (!world.player.IsAlive)
+            if (world.player.gameOver)
             {
-                SpriteBatch batch = new SpriteBatch(spriteManager.GraphicsDevice);
-                batch.Begin();
-                batch.DrawString(gameFont, "GAME OVER!!!!", new Vector2(200, 0), Color.White);
-                batch.End();
                 // If the game is transitioning on or off, fade it out to black.
                 if (TransitionPosition > 0 || pauseAlpha > 0) 
                 {
@@ -419,6 +415,7 @@ namespace GCA2
                     ScreenManager.FadeBackBufferToBlack(alpha);
                 }
             }
+            base.Draw(gameTime);
         }
 
         #endregion
