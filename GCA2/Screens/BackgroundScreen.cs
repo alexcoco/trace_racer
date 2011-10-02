@@ -107,8 +107,12 @@ namespace GCA2
             spriteBatch.Draw(textures[position], fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
-            spriteBatch.End();
-            
+            // crash bug =(
+            if (!spriteBatch.IsDisposed)
+            {
+                spriteBatch.End();
+
+            }
             base.Draw(gameTime);
         }
 

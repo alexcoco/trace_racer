@@ -60,7 +60,7 @@ namespace GCA2
                         (float)random.NextDouble());
             float size = (float)random.NextDouble();
             // int ttl = 20 + random.Next(40);
-            int ttl = 30; 
+            int ttl = 7; 
             return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
         }
 

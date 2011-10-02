@@ -126,9 +126,10 @@ namespace GCA2
                     // particles
                     if (world.getGates()[j].isHit)
                     {
-                        part.EmitterLocation = new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y);
+                        // at gates
+                        //part.EmitterLocation = new Vector2(world.getGates()[j].position.X, world.getGates()[j].position.Y);
                         part.Update();
-
+                        // also at player
                         part.Draw(spriteBatch);
                     }
                 }
