@@ -100,7 +100,17 @@ namespace GCA2
                 {
                     airtime++;
                     // In the air
-                    Position.Y += (airtime / (4 * gameTime.ElapsedGameTime.Milliseconds));
+
+                    float dropSize = Math.Abs(Position.Y + Texture.Height - (TouchPanel.DisplayHeight - World.getLine((int)Position.X).Height));
+                    int yDiff = 3;
+
+                    if (dropSize > 45)
+                    {
+                        yDiff = (airtime / (6 * gameTime.ElapsedGameTime.Milliseconds));
+                    }
+
+                    Position.Y += yDiff;
+
                     int diff2 = World.getPositionDifference();
 
                     while (diff2 > 0)
