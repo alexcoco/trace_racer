@@ -18,7 +18,7 @@ namespace GCA2
         SpriteBatch spriteBatch;
 
         List<WorldLine> lineQueue = new List<WorldLine>(800);
-        List<Gate> gateQueue = new List<Gate>(10);
+        List<Gate> gateQueue = new List<Gate>(50);
 
         public PlayerObject player;
 
@@ -72,9 +72,9 @@ namespace GCA2
             foreach(Gate gate in gateQueue)
             {
                 gX = gate.position.X;
-                gX2 = gX + gate.gate.Width;
+                gX2 = gX + gate.myTexture.Width;
                 gY = gate.position.Y;
-                gY2 = gY + gate.gate.Height;
+                gY2 = gY + gate.myTexture.Height;
 
                 if (!gate.isHit && 
                     ((gX <= pX) && (pX <= gX2) ||
