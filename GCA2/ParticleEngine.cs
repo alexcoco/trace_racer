@@ -47,7 +47,7 @@ namespace GCA2
             Texture2D texture = textures[random.Next(textures.Count)];
             Vector2 position = EmitterLocation;
             Vector2 velocity = new Vector2(
-                                    1f * (float)(random.NextDouble() * 2 - 1),
+                                    -Math.Abs(5f * (float)(random.NextDouble() * 2 - 1)),
                                     1f * (float)(random.NextDouble() * 2 - 1));
             float angle = 0;
             float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
@@ -63,12 +63,12 @@ namespace GCA2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+           // spriteBatch.Begin();
             for (int index = 0; index < particles.Count; index++)
             {
                 particles[index].Draw(spriteBatch);
             }
-            spriteBatch.End();
+            //spriteBatch.End();
         }
     }
 

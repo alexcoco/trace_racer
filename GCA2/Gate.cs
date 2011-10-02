@@ -30,7 +30,7 @@ namespace GCA2
             gatePassed = game.Content.Load<Texture2D>("gates/gate1");
             numberOfMillies = 800;
             int value = rand.Next(0, TouchPanel.DisplayHeight/2);
-            position = new Vector2(1000 + x, value);
+            position = new Vector2(2000 + x, value);
         }
         public override void Update(GameTime gameTime)
         {

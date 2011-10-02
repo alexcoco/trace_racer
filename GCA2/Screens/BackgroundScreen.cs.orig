@@ -62,7 +62,7 @@ namespace GCA2
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-                backgroundTexture = content.Load<Texture2D>("bg/TitleScreen");
+                backgroundTexture = content.Load<Texture2D>("TitleScreen");
             }
         }
 

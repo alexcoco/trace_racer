@@ -33,7 +33,6 @@ namespace GCA2
         ContentManager content;
         Vector2 touchPosition = new Vector2(0, 0);
 
-        // parallax mngr
         SpriteManager spriteManager;
         WorldObject world;
         Boolean hasStarted = false;
@@ -44,6 +43,7 @@ namespace GCA2
         float pauseAlpha;
         InputAction pauseAction;
         int newLineY;
+        ParticleEngine part;
 
         #endregion
 
@@ -74,7 +74,11 @@ namespace GCA2
             {
                 if (content == null)
                     content = new ContentManager(ScreenManager.Game.Services, "Content");
-                //gameFont = content.Load<SpriteFont>("gamefont");
+
+                List<Texture2D> textures = new List<Texture2D>();
+                textures.Add(content.Load<Texture2D>("tex/star"));
+                part = new ParticleEngine(textures, new Vector2(400, 240));
+
                 world = new WorldObject(ScreenManager.Game, ScreenManager.SpriteBatch);
 
                 // create worldline queue
@@ -83,14 +87,10 @@ namespace GCA2
                     world.addLine(-1);
                 }
 
-                // A real game would probably have more content than this sample, so
-                // it would take longer to load. We simulate that by delaying for a
-                // while, giving you a chance to admire the beautiful loading screen.
+                spriteManager = new SpriteManager(ScreenManager.Game, touchPosition, isPressed, world, part);
+                ScreenManager.Game.Components.Add(spriteManager);
                 Thread.Sleep(1000);
 
-                // once the load has finished, we use ResetElapsedTime to tell the game's
-                // timing mechanism that we have just finished a very long frame, and that
-                // it should not try to catch up.
                 ScreenManager.Game.ResetElapsedTime();
             }
 
@@ -100,9 +100,8 @@ namespace GCA2
                 // playerPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["PlayerPosition"];
                 // enemyPosition = (Vector2)Microsoft.Phone.Shell.PhoneApplicationService.Current.State["EnemyPosition"];
             }
-#endif
         }
-
+#endif
         public override void Deactivate()
         {
 #if WINDOWS_PHONE
@@ -151,19 +150,20 @@ namespace GCA2
 
             if (IsActive)
             {
-                if (world.player.IsAlive & !world.player.gameOver)
+                if (!hasStarted || world.player.IsAlive & !world.player.gameOver)
                 {
                     #region GAME LOGIC
 
                     for (int i = 0; i < gameTime.ElapsedGameTime.Milliseconds; i++)
                     {
+
                         TouchCollection touchCollection = TouchPanel.GetState();
 
                         world.removeLine(0);
                         pressedLastX--;
 
                         // create gates
-                        if (world.player.Score.Points > 0 & world.player.Score.Points % 10000 == 0)
+                        if (world.player.Score.Points > 0 & world.player.Score.Points % 5000 == 0)
                         {
                             world.createGates();
                         }
@@ -306,13 +306,18 @@ namespace GCA2
                     {
                         if (tl.State == TouchLocationState.Pressed || (tl.State == TouchLocationState.Moved))
                         {
-                            //LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMainMenuScreen());
+                            //ScreenManager.Game.Components.Remove(spriteManager);
+                            //ScreenManager.Game.Components.Remove(parallaxManager);
+                            //LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(), new PhoneMenuScreen("Title"));
+                            //System.Diagnostics.Debug.WriteLine("SdfdsF");
+                            //LoadingScreen.Load(ScreenManager, true, PlayerIndex.One, new GameplayScreen());
                         }
-                        break;
                     }
                 }
+                // particles
+                part.EmitterLocation = new Vector2(world.player.Position.X - 35, world.player.Position.Y + 75);
+                part.Update();
             }
-
         }
 
         /// <summary>
@@ -395,7 +400,11 @@ namespace GCA2
                 if (TransitionPosition > 0 || pauseAlpha > 0)
                 {
                     float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
-
+#if WINDOWS_PHONE
+                    ScreenManager.AddScreen(new PhonePauseScreen(), ControllingPlayer);
+#else
+                ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
+#endif
                     ScreenManager.FadeBackBufferToBlack(alpha);
                 }
             }
