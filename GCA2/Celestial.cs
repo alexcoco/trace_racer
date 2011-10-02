@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace GCA2
@@ -9,6 +10,8 @@ namespace GCA2
         GraphicsDeviceManager graphics;
         ScreenManager screenManager;
         ScreenFactory screenFactory;
+        SoundEffect gameMusic;
+        SoundEffectInstance gameMusicI;
 
         public GameStateManagementGame()
         {
@@ -39,6 +42,10 @@ namespace GCA2
 #else
             AddInitialScreens();
 #endif
+            gameMusic = Content.Load<SoundEffect>("sounds/GamePlayHalfBit");
+            gameMusicI = gameMusic.CreateInstance();
+            gameMusicI.IsLooped = true;
+            gameMusicI.Play();
         }
 
         private void AddInitialScreens()
