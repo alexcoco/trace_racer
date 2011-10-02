@@ -27,7 +27,7 @@ namespace GCA2
         public WorldLine CurrentLine { get; set; }
         public Score Score { get; set; }
         Boolean isActive = false;
-        int airtime = 0;
+        public int airtime = 0;
 
         private SpriteBatch mySpriteBatch;
 
@@ -189,13 +189,6 @@ namespace GCA2
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
-            if (this.IsAlive)
-            {
-                mySpriteBatch.Begin();
-                mySpriteBatch.Draw(Texture, Position, Color.White);
-                mySpriteBatch.End();
-            }
-
             base.Draw(gameTime);
         }
         /// <summary>
